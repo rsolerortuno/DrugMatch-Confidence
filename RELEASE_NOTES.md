@@ -1,15 +1,24 @@
-# DrugMatch-Confidence 1.0.0
+# DrugMatch-Confidence v1.0.1
 
-This release completes the real-data milestone that was blocked in version 0.1.0.
+This patch release stabilizes the initial public release.
 
-## Highlights
+## Fixed
 
-- Five real XGBoost model bundles trained from DepMap Public 26Q1 and PRISM.
-- Trametinib OOF AUROC 0.86 and strict GDSC2 AUROC 0.84.
-- Afatinib OOF AUROC 0.92 and strict GDSC2 AUROC 0.83.
-- Palbociclib retained as exploratory; olaparib and gemcitabine retained as weak/negative results.
-- ROC and balanced-accuracy threshold curves included.
-- Complete external validation, SHAP, feature stability, modality ablation and lineage stress tests.
-- README and documentation rewritten for non-expert readers.
+- Fixed compatibility with pandas Arrow-backed indexes during grouped train,
+  validation and test splitting.
+- Fixed Ruff lint and import-order issues.
+- Fixed static typing errors reported by mypy.
+- Removed an unused variable and obsolete type suppressions.
+- Improved compatibility with current pandas, scikit-learn and Ruff versions.
 
-The release remains strictly preclinical and is not a patient-response predictor.
+## Validation
+
+- Ruff: passed.
+- Mypy: passed.
+- Pytest: 22 tests passed.
+- Python compilation: passed.
+- CLI smoke test: passed.
+- GitHub Actions: passed.
+
+The trained models, scientific results and intended preclinical use remain
+unchanged from v1.0.0.
