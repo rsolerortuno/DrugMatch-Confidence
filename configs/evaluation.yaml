@@ -1,0 +1,19 @@
+splits:
+  train: 0.70
+  validation: 0.15
+  test: 0.15
+labels:
+  sensitive_quantile: 0.25
+  resistant_quantile: 0.75
+uncertainty:
+  conformal_coverage: 0.90
+ood:
+  pca_components: 8
+  caution_quantile: 0.95
+  ood_quantile: 0.99
+drug_selection:
+  min_models: 350
+  max_missing_fraction: 0.20
+  min_sensitive: 50
+  min_resistant: 50
+  min_lineages: 5

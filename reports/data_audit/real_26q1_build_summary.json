@@ -1,0 +1,50 @@
+{
+  "n_models": 1105,
+  "n_features": 58498,
+  "feature_groups": {
+    "expression": 19215,
+    "mutations": 20132,
+    "copy_number": 19144,
+    "signatures": 6,
+    "lineage": 1
+  },
+  "drug_overlap": {
+    "trametinib": {
+      "n_models": 375,
+      "auc_min": 0.33074992836116257,
+      "auc_max": 1.686978213022905,
+      "auc_std": 0.20129177130206766,
+      "n_lineages": 22
+    },
+    "afatinib": {
+      "n_models": 368,
+      "auc_min": 0.2528816465819498,
+      "auc_max": 1.3911539073426313,
+      "auc_std": 0.14983521715186388,
+      "n_lineages": 22
+    },
+    "palbociclib": {
+      "n_models": 370,
+      "auc_min": 0.5129320437124048,
+      "auc_max": 2.24797492027832,
+      "auc_std": 0.21152688162505903,
+      "n_lineages": 22
+    },
+    "olaparib": {
+      "n_models": 374,
+      "auc_min": 0.5447815977343814,
+      "auc_max": 1.50126445127805,
+      "auc_std": 0.1385339102464511,
+      "n_lineages": 22
+    },
+    "gemcitabine": {
+      "n_models": 298,
+      "auc_min": 0.0075898427372001,
+      "auc_max": 0.986296484845819,
+      "auc_std": 0.1449552544848861,
+      "n_lineages": 21
+    }
+  },
+  "elapsed_seconds": 16.71320343017578,
+  "max_rss_mb": 2091.890625
+}

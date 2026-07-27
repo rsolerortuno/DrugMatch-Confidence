@@ -1,0 +1,25 @@
+{
+  "drug": "gemcitabine",
+  "n_regression": 298,
+  "n_classification": 150,
+  "regression": {
+    "mae": 0.10822018733876244,
+    "rmse": 0.14495484005453294,
+    "r2": -0.003361266077263503,
+    "spearman": 0.16321074768696595,
+    "pearson": 0.14197335616122359
+  },
+  "classification": {
+    "accuracy": 0.4866666666666667,
+    "balanced_accuracy": 0.4866666666666667,
+    "precision": 0.4857142857142857,
+    "recall": 0.4533333333333333,
+    "f1": 0.4689655172413793,
+    "mcc": -0.02672612419124244,
+    "brier": 0.2526218045291308,
+    "auroc": 0.4817777777777778,
+    "auprc": 0.4984464915782917,
+    "fold_specific_threshold_accuracy": 0.48
+  },
+  "elapsed_seconds": 8.274233341217041
+}

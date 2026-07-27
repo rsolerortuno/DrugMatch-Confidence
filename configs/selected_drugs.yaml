@@ -1,0 +1,23 @@
+version: 1
+selection_source: PRISM Repurposing Secondary Screen audit
+selected_drugs:
+  - name: trametinib
+    mechanism: MEK1/2 inhibitor
+    biological_reason: MAPK pathway dependence provides an interpretable positive-control setting.
+  - name: afatinib
+    mechanism: irreversible EGFR/ERBB-family inhibitor
+    biological_reason: Response can be related to ERBB signalling, lineage, and bypass-pathway activity.
+  - name: palbociclib
+    mechanism: CDK4/6 inhibitor
+    biological_reason: Tests whether RB/cell-cycle molecular features add value beyond lineage.
+  - name: olaparib
+    mechanism: PARP inhibitor
+    biological_reason: Tests homologous-recombination and DNA-repair biomarkers.
+  - name: gemcitabine
+    mechanism: nucleoside analogue antimetabolite
+    biological_reason: Adds a mechanistically distinct cytotoxic response problem.
+notes:
+  - All five drugs passed the real PRISM coverage audit.
+  - Trametinib and afatinib are validated portfolio demonstrations.
+  - Palbociclib is exploratory; olaparib and gemcitabine have insufficient predictive evidence.
+  - GDSC2 was used only as frozen external validation.

@@ -1,0 +1,52 @@
+{
+  "drug": "afatinib",
+  "predicted_auc": 0.9470057487487793,
+  "interval_lower": 0.6053723128729536,
+  "interval_upper": 1.0,
+  "predicted_class": "resistant",
+  "response_zone": "resistant",
+  "model_agreement": "concordant",
+  "sensitivity_probability": 0.30318030085116554,
+  "confidence": "high",
+  "ood_status": "in-distribution",
+  "top_drivers": [
+    {
+      "feature": "expression__expr::IRF6 (3664)",
+      "shap_value": -0.4743306338787079
+    },
+    {
+      "feature": "expression__expr::CDH1 (999)",
+      "shap_value": -0.41116249561309814
+    },
+    {
+      "feature": "expression__expr::LGALS1 (3956)",
+      "shap_value": -0.38505202531814575
+    },
+    {
+      "feature": "expression__expr::LSR (51599)",
+      "shap_value": -0.33039891719818115
+    },
+    {
+      "feature": "expression__expr::CLDN1 (9076)",
+      "shap_value": -0.30689331889152527
+    },
+    {
+      "feature": "expression__expr::LAD1 (3898)",
+      "shap_value": -0.30406028032302856
+    },
+    {
+      "feature": "copy_number__cn::GRB7 (2886)",
+      "shap_value": -0.1907288134098053
+    },
+    {
+      "feature": "expression__expr::NRCAM (4897)",
+      "shap_value": -0.1673654168844223
+    }
+  ],
+  "feature_coverage": 0.9913344887348353,
+  "missing_feature_count": 5,
+  "data_release": "DepMap Public 26Q1 + PRISM Repurposing Secondary Screen",
+  "model_status": "validated_demo",
+  "evidence_summary": "Five-fold OOF AUROC 0.92; strict GDSC2 holdout AUROC 0.83. Recommended as the main portfolio demonstration.",
+  "disclaimer": "For preclinical research use only. Predictions concern cancer cell-line models and must not be interpreted as patient treatment recommendations."
+}

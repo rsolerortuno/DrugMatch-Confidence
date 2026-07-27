@@ -1,0 +1,26 @@
+[
+  {
+    "source": "PRISM",
+    "release": "Repurposing Secondary Screen",
+    "name": "response",
+    "url": "https://ndownloader.figshare.com/files/20237739",
+    "bytes": 264340589,
+    "sha256": "88d1013506e0cd6f191a51c5f3fdd3fb2be54f8afb4e19a5d1f8538e81fbfec8"
+  },
+  {
+    "source": "PRISM",
+    "release": "Repurposing Secondary Screen",
+    "name": "cell_line_info",
+    "url": "https://ndownloader.figshare.com/files/20237769",
+    "bytes": 40979,
+    "sha256": "b93436b5f4bcf5fd14589697be4ca8f99ffd99d639223080380bc514c3718d27"
+  },
+  {
+    "source": "PRISM",
+    "release": "Repurposing Secondary Screen",
+    "name": "treatment_info",
+    "url": "https://ndownloader.figshare.com/files/20237763",
+    "bytes": 3788355,
+    "sha256": "9d0d1fb4faa87a63cd84965ec5e2b55a9df5680520a41b029abb679cfd4384f7"
+  }
+]

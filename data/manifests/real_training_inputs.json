@@ -1,0 +1,110 @@
+[
+  {
+    "source": "DepMap Public 26Q1",
+    "file": "OmicsExpressionTPMLogp1HumanProteinCodingGenes.csv",
+    "local_training_file": "data/raw/depmap/OmicsExpressionTPMLogp1HumanProteinCodingGenes.csv.zip",
+    "bytes": 132913463,
+    "sha256": "46fd433bdf4bfa8baf9b63fb2e9fd72ecabf64397e0c4d9142158e3b4be743c2",
+    "official_download_page": "https://depmap.org/portal/data_page/?tab=currentRelease",
+    "role": "RNA-seq log2(TPM+1), protein-coding genes"
+  },
+  {
+    "source": "DepMap Public 26Q1",
+    "file": "OmicsSomaticMutationsMatrixDamaging.csv",
+    "local_training_file": "data/raw/depmap/OmicsSomaticMutationsMatrixDamaging.csv.zip",
+    "bytes": 797243,
+    "sha256": "d4c2f89252b9a7e1bc074e16c5770abfd5dd0939236f4f65e3e33a47deede260",
+    "official_download_page": "https://depmap.org/portal/data_page/?tab=currentRelease",
+    "role": "Likely loss-of-function mutation matrix"
+  },
+  {
+    "source": "DepMap Public 26Q1",
+    "file": "OmicsSomaticMutationsMatrixHotspot.csv",
+    "local_training_file": "data/raw/depmap/OmicsSomaticMutationsMatrixHotspot.csv",
+    "bytes": 6902729,
+    "sha256": "a86cd8c92b86d5507e63103f06a507913897c85262e0a0d7e44fa22768dd4dc9",
+    "official_download_page": "https://depmap.org/portal/data_page/?tab=currentRelease",
+    "role": "Cancer hotspot mutation matrix"
+  },
+  {
+    "source": "DepMap Public 26Q1",
+    "file": "PortalOmicsCNGeneLog2.csv",
+    "local_training_file": "data/raw/depmap/PortalOmicsCNGeneLog2.csv.zip",
+    "bytes": 180634610,
+    "sha256": "a71ebebd6e0b5d7bab8f03233b97d1491c1983e821661959827dbc39c1a5adec",
+    "official_download_page": "https://depmap.org/portal/data_page/?tab=currentRelease",
+    "role": "Model-level log2 copy-number matrix"
+  },
+  {
+    "source": "DepMap Public 26Q1",
+    "file": "OmicsGlobalSignatures.csv",
+    "local_training_file": "data/raw/depmap/OmicsGlobalSignatures.csv",
+    "bytes": 328507,
+    "sha256": "d210b664edf42598129a3bb982af4a3b4aa22100411bb61ecb9baa7f81cf6011",
+    "official_download_page": "https://depmap.org/portal/data_page/?tab=currentRelease",
+    "role": "MSI, ploidy, CIN, WGD, LOH and aneuploidy"
+  },
+  {
+    "source": "DepMap Public 26Q1",
+    "file": "Model.csv",
+    "local_training_file": "data/raw/depmap/Model.csv",
+    "bytes": 697455,
+    "sha256": "ea4e0b2a3bc806f81df62689a5ae75f1a100135727a3d7b8a4c7ccc8815183f8",
+    "official_download_page": "https://depmap.org/portal/data_page/?tab=currentRelease",
+    "role": "Model identifiers and lineage metadata"
+  },
+  {
+    "source": "PRISM Repurposing Secondary Screen",
+    "file": "secondary-screen-dose-response-curve-parameters.csv",
+    "local_training_file": "data/raw/prism/secondary-screen-dose-response-curve-parameters.csv",
+    "bytes": 264340589,
+    "sha256": "88d1013506e0cd6f191a51c5f3fdd3fb2be54f8afb4e19a5d1f8538e81fbfec8",
+    "official_download_page": "https://depmap.org/repurposing/",
+    "role": "Dose-response curve parameters and AUC"
+  },
+  {
+    "source": "PRISM Repurposing Secondary Screen",
+    "file": "secondary-screen-cell-line-info.csv",
+    "local_training_file": "data/raw/prism/secondary-screen-cell-line-info.csv",
+    "bytes": 40979,
+    "sha256": "b93436b5f4bcf5fd14589697be4ca8f99ffd99d639223080380bc514c3718d27",
+    "official_download_page": "https://depmap.org/repurposing/",
+    "role": "PRISM model metadata"
+  },
+  {
+    "source": "PRISM Repurposing Secondary Screen",
+    "file": "secondary-screen-replicate-treatment-info.csv",
+    "local_training_file": "data/raw/prism/secondary-screen-replicate-treatment-info.csv",
+    "bytes": 3788355,
+    "sha256": "9d0d1fb4faa87a63cd84965ec5e2b55a9df5680520a41b029abb679cfd4384f7",
+    "official_download_page": "https://depmap.org/repurposing/",
+    "role": "Compound and treatment metadata"
+  },
+  {
+    "source": "GDSC2",
+    "file": "GDSC2_fitted_dose_response_27Oct23.xlsx",
+    "local_training_file": "data/raw/gdsc2/GDSC2_fitted_dose_response_27Oct23.xlsx",
+    "bytes": 21330376,
+    "sha256": "f950a7027be265f8a7a74220a27fd18cbd368485349bd8c2048e88bb1cd07560",
+    "official_download_page": "https://cellmodelpassports.sanger.ac.uk/downloads",
+    "role": "Independent fitted GDSC2 responses"
+  },
+  {
+    "source": "Cell Model Passports 2.18.0",
+    "file": "model_list_20260724.csv",
+    "local_training_file": "data/raw/gdsc2/model_list_20260724.csv",
+    "bytes": 957399,
+    "sha256": "b040d09adca435d99a9378a6de573a0751b9ef7bcd402f5f3d1a475192d73d9b",
+    "official_download_page": "https://cellmodelpassports.sanger.ac.uk/downloads",
+    "role": "Sanger model annotation export"
+  },
+  {
+    "source": "GDSC release 8.5",
+    "file": "screened_compounds_rel_8.5.csv",
+    "local_training_file": "data/raw/gdsc2/screened_compounds_rel_8.5.csv",
+    "bytes": 46414,
+    "sha256": "d3cbb8b595980b36bf92d54af1da1dd995d2e2ce624c7cc70aacf2a754dce782",
+    "official_download_page": "https://cellmodelpassports.sanger.ac.uk/downloads",
+    "role": "GDSC compound annotation"
+  }
+]

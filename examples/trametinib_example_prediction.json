@@ -1,0 +1,52 @@
+{
+  "drug": "trametinib",
+  "predicted_auc": 1.0,
+  "interval_lower": 0.6749327867984372,
+  "interval_upper": 1.0,
+  "predicted_class": "resistant",
+  "response_zone": "resistant",
+  "model_agreement": "concordant",
+  "sensitivity_probability": 0.3145919624222405,
+  "confidence": "high",
+  "ood_status": "in-distribution",
+  "top_drivers": [
+    {
+      "feature": "expression__expr::PLAT (5327)",
+      "shap_value": -0.4165573716163635
+    },
+    {
+      "feature": "expression__expr::EMP1 (2012)",
+      "shap_value": -0.38995036482810974
+    },
+    {
+      "feature": "expression__expr::SDC2 (6383)",
+      "shap_value": -0.36059439182281494
+    },
+    {
+      "feature": "expression__expr::DUSP6 (1848)",
+      "shap_value": -0.3396310806274414
+    },
+    {
+      "feature": "expression__expr::IGFBP5 (3488)",
+      "shap_value": -0.31490519642829895
+    },
+    {
+      "feature": "expression__expr::EREG (2069)",
+      "shap_value": -0.29843011498451233
+    },
+    {
+      "feature": "expression__expr::NT5E (4907)",
+      "shap_value": -0.2932721674442291
+    },
+    {
+      "feature": "expression__expr::FSTL1 (11167)",
+      "shap_value": 0.22475221753120422
+    }
+  ],
+  "feature_coverage": 1.0,
+  "missing_feature_count": 0,
+  "data_release": "DepMap Public 26Q1 + PRISM Repurposing Secondary Screen",
+  "model_status": "validated_demo",
+  "evidence_summary": "Five-fold OOF AUROC 0.86; strict GDSC2 holdout AUROC 0.84. Recommended as the main portfolio demonstration.",
+  "disclaimer": "For preclinical research use only. Predictions concern cancer cell-line models and must not be interpreted as patient treatment recommendations."
+}

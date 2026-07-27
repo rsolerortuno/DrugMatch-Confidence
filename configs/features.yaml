@@ -1,0 +1,18 @@
+expression:
+  max_features: 300
+  min_variance: 0.0
+mutations:
+  min_prevalence: 0.03
+  max_features: 120
+  preserve_call_types: true
+copy_number:
+  max_features: 120
+  primary_matrix: PortalOmicsCNGeneLog2.csv
+signatures:
+  enabled: true
+  include_all: true
+lineage:
+  enabled: true
+selection:
+  fit_on_training_only: true
+  preserve_mechanism_informed_genes: true

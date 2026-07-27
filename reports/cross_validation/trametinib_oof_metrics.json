@@ -1,0 +1,25 @@
+{
+  "drug": "trametinib",
+  "n_regression": 375,
+  "n_classification": 189,
+  "regression": {
+    "mae": 0.13293492628013764,
+    "rmse": 0.17497655249927055,
+    "r2": 0.24235225752098433,
+    "spearman": 0.5168866817073541,
+    "pearson": 0.4927282451551456
+  },
+  "classification": {
+    "accuracy": 0.783068783068783,
+    "balanced_accuracy": 0.7831466965285554,
+    "precision": 0.7934782608695652,
+    "recall": 0.7684210526315789,
+    "f1": 0.7807486631016043,
+    "mcc": 0.5664837331195326,
+    "brier": 0.18735114654049606,
+    "auroc": 0.8608062709966405,
+    "auprc": 0.8841027375275328,
+    "fold_specific_threshold_accuracy": 0.7883597883597884
+  },
+  "elapsed_seconds": 9.577129125595093
+}

@@ -1,0 +1,85 @@
+{
+  "version": "1.0.0",
+  "tests_passed": 22,
+  "compileall": "passed",
+  "wheel": {
+    "path": "dist/drugmatch_confidence-1.0.0-py3-none-any.whl",
+    "bytes": 49835,
+    "sha256": "1aa4bb78c550c97d8e9fcac533251dc1e6afe9ec9d2e23770aaf62a91e714001"
+  },
+  "models": [
+    {
+      "drug": "afatinib",
+      "bytes": 594010,
+      "sha256": "99454b25067917b2539d4973bd52c2dfcce83b23ab5ad075bba899b80c56bf03",
+      "validation_status": "validated_demo",
+      "project_version": "1.0.0",
+      "smoke_probability": 0.3460308835362687,
+      "smoke_response_zone": "intermediate",
+      "smoke_model_agreement": "indeterminate"
+    },
+    {
+      "drug": "gemcitabine",
+      "bytes": 530245,
+      "sha256": "7eecf8bd7ce9c8715deef954a8bafd40d68eb72c3995ffd3edbeea1a83746b6a",
+      "validation_status": "insufficient_evidence",
+      "project_version": "1.0.0",
+      "smoke_probability": 0.5112034463377458,
+      "smoke_response_zone": "intermediate",
+      "smoke_model_agreement": "indeterminate"
+    },
+    {
+      "drug": "olaparib",
+      "bytes": 633014,
+      "sha256": "efc4d28f5c16443a1aa6f9bfbbd26d35507233173df6d851b2aa87d506d49234",
+      "validation_status": "insufficient_evidence",
+      "project_version": "1.0.0",
+      "smoke_probability": 0.4313718304947166,
+      "smoke_response_zone": "intermediate",
+      "smoke_model_agreement": "indeterminate"
+    },
+    {
+      "drug": "palbociclib",
+      "bytes": 606802,
+      "sha256": "a92c74c7be9d78d501cf745c35c365cc4cc822916bc7d44c804eeb2256c66924",
+      "validation_status": "exploratory",
+      "project_version": "1.0.0",
+      "smoke_probability": 0.36213393303286195,
+      "smoke_response_zone": "resistant",
+      "smoke_model_agreement": "concordant"
+    },
+    {
+      "drug": "trametinib",
+      "bytes": 656940,
+      "sha256": "0dc02e3d1fc84ad44606f981a8233f49c8dfca90ae4b13c91dd72d47cf376f3d",
+      "validation_status": "validated_demo",
+      "project_version": "1.0.0",
+      "smoke_probability": 0.3204380547331149,
+      "smoke_response_zone": "resistant",
+      "smoke_model_agreement": "concordant"
+    }
+  ],
+  "figures": [
+    {
+      "file": "reports/figures/oof_roc_curves.png",
+      "bytes": 92037,
+      "valid_png": true
+    },
+    {
+      "file": "reports/figures/oof_accuracy_threshold_curves.png",
+      "bytes": 114604,
+      "valid_png": true
+    },
+    {
+      "file": "reports/figures/external_roc_curves_strict_holdout.png",
+      "bytes": 86009,
+      "valid_png": true
+    }
+  ],
+  "cli_help": "passed",
+  "cli_prediction": "passed",
+  "data_build_pickle_smoke": "passed",
+  "markdown_link_check": "passed",
+  "local_static_analysis_note": "ruff and mypy are configured in CI; their packages were unavailable from the offline build environment, so no local pass is claimed.",
+  "docker_note": "Docker build is configured in CI; no Docker daemon was available in the build environment."
+}

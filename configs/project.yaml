@@ -1,0 +1,10 @@
+project_name: DrugMatch-Confidence
+version: 1.0.0
+random_seed: 42
+preclinical_only: true
+paths:
+  raw: data/raw
+  interim: data/interim
+  processed: data/processed
+  models: models
+  reports: reports

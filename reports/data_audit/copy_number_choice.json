@@ -1,0 +1,13 @@
+{
+  "wgs_models": 1118,
+  "portal_models": 1118,
+  "common_models": 1118,
+  "wgs_features": 19955,
+  "portal_features": 19144,
+  "common_features": 19144,
+  "median_spearman_after_log2": 1.0,
+  "median_wgs_missing_fraction": 0.0,
+  "median_portal_missing_fraction": 0.0,
+  "selected_primary": "PortalOmicsCNGeneLog2.csv",
+  "reason": "Same model coverage, model-level indexing, lower skew, and near-equivalent rank information after log transformation."
+}

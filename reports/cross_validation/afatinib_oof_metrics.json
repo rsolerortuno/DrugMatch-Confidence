@@ -1,0 +1,25 @@
+{
+  "drug": "afatinib",
+  "n_regression": 368,
+  "n_classification": 184,
+  "regression": {
+    "mae": 0.09499038648583819,
+    "rmse": 0.1277396638497805,
+    "r2": 0.27120482425810255,
+    "spearman": 0.5711101378159014,
+    "pearson": 0.5234269039133372
+  },
+  "classification": {
+    "accuracy": 0.8478260869565217,
+    "balanced_accuracy": 0.847689944464138,
+    "precision": 0.8421052631578947,
+    "recall": 0.8602150537634409,
+    "f1": 0.851063829787234,
+    "mcc": 0.6957087903958462,
+    "brier": 0.14403873895124708,
+    "auroc": 0.9165780456103036,
+    "auprc": 0.9123982651826456,
+    "fold_specific_threshold_accuracy": 0.8586956521739131
+  },
+  "elapsed_seconds": 9.1717369556427
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "drug": "trametinib",
+    "validation_status": "validated_demo",
+    "oof_auroc": 0.8608062709966405,
+    "strict_gdsc2_auroc": 0.84,
+    "recommendation": "Recommended as the main portfolio demonstration."
+  },
+  {
+    "drug": "afatinib",
+    "validation_status": "validated_demo",
+    "oof_auroc": 0.9165780456103036,
+    "strict_gdsc2_auroc": 0.8264462809917356,
+    "recommendation": "Recommended as the main portfolio demonstration."
+  },
+  {
+    "drug": "palbociclib",
+    "validation_status": "exploratory",
+    "oof_auroc": 0.7502596053997924,
+    "strict_gdsc2_auroc": 0.5123966942148761,
+    "recommendation": "Useful research signal, but transfer is not sufficiently stable for the main claim."
+  },
+  {
+    "drug": "olaparib",
+    "validation_status": "insufficient_evidence",
+    "oof_auroc": 0.5404640633842671,
+    "strict_gdsc2_auroc": 0.6805555555555556,
+    "recommendation": "Included as a documented negative/weak result; do not use as a reliable predictor."
+  },
+  {
+    "drug": "gemcitabine",
+    "validation_status": "insufficient_evidence",
+    "oof_auroc": 0.4817777777777778,
+    "strict_gdsc2_auroc": 0.7037037037037037,
+    "recommendation": "Included as a documented negative/weak result; do not use as a reliable predictor."
+  }
+]

@@ -1,0 +1,50 @@
+feature,fold_frequency,frequency_fraction,mean_rank_when_selected,stable
+expression__expr::KYNU (8942),3,1.0,10.0,True
+expression__expr::GAL (51083),2,0.6666666666666666,6.5,False
+expression__expr::COL3A1 (1281),2,0.6666666666666666,8.5,False
+expression__expr::SNRPN (6638),2,0.6666666666666666,9.0,False
+expression__expr::C15orf48 (84419),2,0.6666666666666666,10.0,False
+expression__expr::RAB34 (83871),2,0.6666666666666666,10.0,False
+copy_number__cn::GSTM1 (2944),2,0.6666666666666666,11.5,False
+expression__expr::TGFBI (7045),2,0.6666666666666666,13.5,False
+expression__expr::MLPH (79083),2,0.6666666666666666,14.5,False
+signatures__sig::CIN,2,0.6666666666666666,14.5,False
+expression__expr::AKR1C2 (1646),1,0.3333333333333333,1.0,False
+expression__expr::IGFBP7 (3490),1,0.3333333333333333,1.0,False
+expression__expr::ABCC3 (8714),1,0.3333333333333333,2.0,False
+expression__expr::COL1A1 (1277),1,0.3333333333333333,2.0,False
+expression__expr::TM4SF1 (4071),1,0.3333333333333333,3.0,False
+copy_number__cn::CDK6 (1021),1,0.3333333333333333,3.0,False
+expression__expr::IL32 (9235),1,0.3333333333333333,4.0,False
+expression__expr::BRCA1 (672),1,0.3333333333333333,4.0,False
+expression__expr::CDH1 (999),1,0.3333333333333333,4.0,False
+expression__expr::COL5A2 (1290),1,0.3333333333333333,5.0,False
+expression__expr::TPM2 (7169),1,0.3333333333333333,5.0,False
+expression__expr::CD24 (100133941),1,0.3333333333333333,5.0,False
+expression__expr::AKR1C3 (8644),1,0.3333333333333333,6.0,False
+expression__expr::TIMP3 (7078),1,0.3333333333333333,6.0,False
+copy_number__cn::ENSG00000260861,1,0.3333333333333333,7.0,False
+expression__expr::COL6A2 (1292),1,0.3333333333333333,7.0,False
+expression__expr::IFITM1 (8519),1,0.3333333333333333,8.0,False
+expression__expr::BGN (633),1,0.3333333333333333,10.0,False
+signatures__sig::Aneuploidy,1,0.3333333333333333,10.0,False
+expression__expr::IGFBP5 (3488),1,0.3333333333333333,11.0,False
+expression__expr::TRIM29 (23650),1,0.3333333333333333,11.0,False
+expression__expr::CRYAB (1410),1,0.3333333333333333,12.0,False
+copy_number__cn::CHEK2 (11200),1,0.3333333333333333,13.0,False
+expression__expr::ERBB3 (2065),1,0.3333333333333333,13.0,False
+expression__expr::RPS4Y1 (6192),1,0.3333333333333333,14.0,False
+expression__expr::BCAT1 (586),1,0.3333333333333333,14.0,False
+expression__expr::ATR (545),1,0.3333333333333333,14.0,False
+expression__expr::RBP1 (5947),1,0.3333333333333333,15.0,False
+expression__expr::PXDN (7837),1,0.3333333333333333,15.0,False
+expression__expr::C19orf33 (64073),1,0.3333333333333333,16.0,False
+expression__expr::MMP2 (4313),1,0.3333333333333333,16.0,False
+expression__expr::STC2 (8614),1,0.3333333333333333,17.0,False
+expression__expr::ITGB3 (3690),1,0.3333333333333333,17.0,False
+expression__expr::CDH3 (1001),1,0.3333333333333333,17.0,False
+copy_number__cn::MDM2 (4193),1,0.3333333333333333,18.0,False
+expression__expr::SELENBP1 (8991),1,0.3333333333333333,19.0,False
+copy_number__cn::LCE3B (353143),1,0.3333333333333333,19.0,False
+expression__expr::LGALS3 (3958),1,0.3333333333333333,20.0,False
+expression__expr::PLIN2 (123),1,0.3333333333333333,20.0,False

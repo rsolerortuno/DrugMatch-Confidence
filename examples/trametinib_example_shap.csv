@@ -1,0 +1,16 @@
+feature,shap_value
+expression__expr::PLAT (5327),-0.41655737
+expression__expr::EMP1 (2012),-0.38995036
+expression__expr::SDC2 (6383),-0.3605944
+expression__expr::DUSP6 (1848),-0.33963108
+expression__expr::IGFBP5 (3488),-0.3149052
+expression__expr::EREG (2069),-0.29843011
+expression__expr::NT5E (4907),-0.29327217
+expression__expr::FSTL1 (11167),0.22475222
+expression__expr::NF1 (4763),0.20509037
+expression__expr::LDOC1 (23641),-0.19196102
+expression__expr::DKK1 (22943),0.16833453
+copy_number__cn::NRAS (4893),-0.16068539
+expression__expr::CD68 (968),-0.12881279
+signatures__sig::Ploidy,-0.110127255
+expression__expr::SFRP1 (6422),0.10937789

@@ -1,0 +1,23 @@
+depmap:
+  preferred_release: "DepMap Public 26Q1"
+  official_download_page: "https://depmap.org/portal/data_page/?tab=currentRelease"
+  required_files:
+    expression: "OmicsExpressionTPMLogp1HumanProteinCodingGenes.csv"
+    damaging_mutations: "OmicsSomaticMutationsMatrixDamaging.csv"
+    hotspot_mutations: "OmicsSomaticMutationsMatrixHotspot.csv"
+    copy_number: "PortalOmicsCNGeneLog2.csv"
+    global_signatures: "OmicsGlobalSignatures.csv"
+    models: "Model.csv"
+prism:
+  release: "PRISM Repurposing Secondary Screen"
+  official_page: "https://depmap.org/repurposing/"
+  response_file: "secondary-screen-dose-response-curve-parameters.csv"
+  cell_line_file: "secondary-screen-cell-line-info.csv"
+  treatment_file: "secondary-screen-replicate-treatment-info.csv"
+gdsc2:
+  response_release: "GDSC2 fitted dose response 27Oct23"
+  downloads_page: "https://cellmodelpassports.sanger.ac.uk/downloads"
+  response_file: "GDSC2_fitted_dose_response_27Oct23.xlsx"
+  model_export: "model_list_20260724.csv"
+  compound_export: "screened_compounds_rel_8.5.csv"
+manifest: "data/manifests/real_training_inputs.json"

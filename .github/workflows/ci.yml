@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[app,dev]"
+      - name: Compile
+        run: python -m compileall -q src app scripts tests
+      - name: Lint
+        run: ruff check src tests app scripts
+      - name: Type check
+        run: mypy src
+      - name: Test
+        run: pytest -q
+      - name: CLI smoke test
+        run: python -m drugmatch --help
+      - name: Real bundle smoke test
+        run: |
+          drugmatch predict \
+            --model models/real/depmap_26q1_prism/trametinib.joblib \
+            --features examples/trametinib_example_input.csv \
+            --output /tmp/prediction.json
+
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Build wheel and source distribution
+        run: |
+          python -m pip install --upgrade pip build
+          python -m build
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t drugmatch-confidence:ci .

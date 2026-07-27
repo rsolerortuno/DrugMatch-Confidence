@@ -1,0 +1,16 @@
+feature,shap_value
+expression__expr::IRF6 (3664),-0.47433063
+expression__expr::CDH1 (999),-0.4111625
+expression__expr::LGALS1 (3956),-0.38505203
+expression__expr::LSR (51599),-0.33039892
+expression__expr::CLDN1 (9076),-0.30689332
+expression__expr::LAD1 (3898),-0.30406028
+copy_number__cn::GRB7 (2886),-0.19072881
+expression__expr::NRCAM (4897),-0.16736542
+copy_number__cn::MARCHF9 (92979),-0.14928377
+expression__expr::SRGN (5552),-0.14189208
+copy_number__cn::OR52N5 (390075),-0.12610184
+expression__expr::TMPRSS4 (56649),-0.12534936
+expression__expr::CDH3 (1001),-0.1230344
+copy_number__cn::PNMT (5409),-0.12267391
+copy_number__cn::OR4K2 (390431),-0.1174729

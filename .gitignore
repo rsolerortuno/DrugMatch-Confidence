@@ -1,0 +1,33 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+.env
+.DS_Store
+build/
+dist/
+
+# Large or generated data
+data/raw/**/*
+!data/raw/**/.gitkeep
+!data/raw/**/README.md
+!data/raw/**/*manifest*.json
+data/interim/**/*
+!data/interim/.gitkeep
+data/processed/**/*
+!data/processed/.gitkeep
+models/full/**/*
+!models/full/.gitkeep
+reports/**/*.html
+reports/**/*.png
+reports/**/*.pdf
+
+# Keep lightweight demo artifacts explicitly added by the project
+!models/demo/**
+!reports/**/*.csv
+!reports/**/*.md
+!reports/**/*.json
+!reports/figures/*.png

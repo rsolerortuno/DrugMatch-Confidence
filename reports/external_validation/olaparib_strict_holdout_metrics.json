@@ -1,0 +1,17 @@
+{
+  "external_resistant_auc_min": 0.9633295,
+  "external_sensitive_auc_max": 0.9448435000000001,
+  "n_overlap": 46.0,
+  "n_tail_models": 24.0,
+  "ood_fraction": 0.0,
+  "spearman": 0.23515263644773357,
+  "tail_accuracy": 0.5833333333333334,
+  "tail_auprc": 0.7379613442113442,
+  "tail_auroc": 0.6805555555555556,
+  "tail_balanced_accuracy": 0.5833333333333333,
+  "tail_brier": 0.23936789926381308,
+  "tail_f1": 0.5454545454545454,
+  "tail_mcc": 0.1690308509457033,
+  "tail_precision": 0.6,
+  "tail_recall": 0.5
+}
