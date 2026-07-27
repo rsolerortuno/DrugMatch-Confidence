@@ -14,21 +14,17 @@ def test_aligned_features_include_signatures_and_call_types(tmp_path: Path) -> N
             "GENE_A": [1.0, 2.0, 3.0],
         }
     ).to_csv(tmp_path / "expression.csv", index=False)
-    pd.DataFrame({"ModelID": ids, "TP53": [1, 0, 1]}).to_csv(
-        tmp_path / "damaging.csv", index=False
-    )
-    pd.DataFrame({"ModelID": ids, "BRAF": [0, 1, 0]}).to_csv(
-        tmp_path / "hotspot.csv", index=False
-    )
+    pd.DataFrame({"ModelID": ids, "TP53": [1, 0, 1]}).to_csv(tmp_path / "damaging.csv", index=False)
+    pd.DataFrame({"ModelID": ids, "BRAF": [0, 1, 0]}).to_csv(tmp_path / "hotspot.csv", index=False)
     pd.DataFrame({"ModelID": ids, "ERBB2": [2.0, 4.0, 1.0]}).to_csv(
         tmp_path / "copy.csv", index=False
     )
     pd.DataFrame({"ModelID": ids, "MSIScore": [0.1, 10.0, 0.2]}).to_csv(
         tmp_path / "signatures.csv", index=False
     )
-    pd.DataFrame(
-        {"ModelID": ids, "OncotreeLineage": ["Lung", "Skin", "Breast"]}
-    ).to_csv(tmp_path / "metadata.csv", index=False)
+    pd.DataFrame({"ModelID": ids, "OncotreeLineage": ["Lung", "Skin", "Breast"]}).to_csv(
+        tmp_path / "metadata.csv", index=False
+    )
 
     features, metadata = load_aligned_features(
         tmp_path / "expression.csv",

@@ -7,7 +7,6 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-
 DRUG_RULES = {
     "trametinib": {"positive": ["EGFR", "PIK3CA"], "negative": ["BRAF", "DUSP6", "SPRY2"]},
     "afatinib": {"positive": ["KRAS", "MET"], "negative": ["EGFR", "ERBB2", "ERBB3"]},
@@ -31,20 +30,30 @@ def generate_synthetic_omics(
     lineages = np.array(["lung", "breast", "colorectal", "melanoma", "ovary", "pancreas"])
     lineage = rng.choice(lineages, size=n_models, p=[0.22, 0.2, 0.18, 0.14, 0.14, 0.12])
 
-    biological_genes = sorted({g for rule in DRUG_RULES.values() for group in rule.values() for g in group})
+    biological_genes = sorted(
+        {g for rule in DRUG_RULES.values() for group in rule.values() for g in group}
+    )
     noise_genes = [f"GENE_{i:03d}" for i in range(n_noise_genes)]
     genes = biological_genes + noise_genes
-    expression = pd.DataFrame(rng.normal(5.0, 1.2, (n_models, len(genes))), index=model_ids, columns=genes)
+    expression = pd.DataFrame(
+        rng.normal(5.0, 1.2, (n_models, len(genes))), index=model_ids, columns=genes
+    )
     mutations = pd.DataFrame(
-        rng.binomial(1, 0.08, (n_models, len(biological_genes))), index=model_ids, columns=biological_genes
+        rng.binomial(1, 0.08, (n_models, len(biological_genes))),
+        index=model_ids,
+        columns=biological_genes,
     )
     copy_number = pd.DataFrame(
-        rng.normal(0.0, 0.45, (n_models, len(biological_genes))), index=model_ids, columns=biological_genes
+        rng.normal(0.0, 0.45, (n_models, len(biological_genes))),
+        index=model_ids,
+        columns=biological_genes,
     )
 
     # Add plausible lineage patterns and known biomarker enrichment.
     expression.loc[lineage == "melanoma", ["BRAF", "DUSP6", "SPRY2"]] += 1.5
-    mutations.loc[lineage == "melanoma", "BRAF"] = rng.binomial(1, 0.55, (lineage == "melanoma").sum())
+    mutations.loc[lineage == "melanoma", "BRAF"] = rng.binomial(
+        1, 0.55, (lineage == "melanoma").sum()
+    )
     expression.loc[lineage == "lung", ["EGFR", "ERBB2", "ERBB3"]] += 0.8
     expression.loc[lineage == "breast", ["CCND1", "CDK4"]] += 0.8
     mutations.loc[lineage == "ovary", ["BRCA1", "BRCA2"]] = rng.binomial(

@@ -6,7 +6,6 @@ from pathlib import Path
 
 from drugmatch.workflows import run_synthetic_training
 
-
 if __name__ == "__main__":
     root = Path(__file__).resolve().parents[1]
     outcomes = run_synthetic_training(root)

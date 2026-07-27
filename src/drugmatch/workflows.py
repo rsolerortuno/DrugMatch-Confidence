@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 from pathlib import Path
-from typing import Sequence
 
 import pandas as pd
 
@@ -17,7 +17,6 @@ from drugmatch.data import (
 from drugmatch.preprocessing import OmicsTables, assemble_features
 from drugmatch.synthetic import generate_synthetic_omics
 from drugmatch.training import TrainingOutcome, train_drug_bundle
-
 
 PREFERRED_DRUGS = ["trametinib", "afatinib", "palbociclib", "olaparib", "gemcitabine"]
 
@@ -35,9 +34,15 @@ def load_aligned_features(
     expression = load_wide_omics(expression_path, model_ids=model_ids)
     metadata = load_model_metadata(metadata_path)
     damaging = load_wide_omics(mutation_path, model_ids=model_ids) if mutation_path else None
-    hotspot = load_wide_omics(hotspot_mutation_path, model_ids=model_ids) if hotspot_mutation_path else None
+    hotspot = (
+        load_wide_omics(hotspot_mutation_path, model_ids=model_ids)
+        if hotspot_mutation_path
+        else None
+    )
     mutations = combine_mutation_matrices(damaging, hotspot)
-    copy_number = load_wide_omics(copy_number_path, model_ids=model_ids) if copy_number_path else None
+    copy_number = (
+        load_wide_omics(copy_number_path, model_ids=model_ids) if copy_number_path else None
+    )
     signatures = load_wide_omics(signatures_path, model_ids=model_ids) if signatures_path else None
     features = assemble_features(
         OmicsTables(expression, mutations, copy_number, metadata, signatures=signatures),

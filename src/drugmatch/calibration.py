@@ -15,13 +15,15 @@ class ProbabilityCalibrator:
 
     method: str = "platt"
 
-    def fit(self, probabilities: np.ndarray, labels: np.ndarray) -> "ProbabilityCalibrator":
+    def fit(self, probabilities: np.ndarray, labels: np.ndarray) -> ProbabilityCalibrator:
         probabilities = np.asarray(probabilities, dtype=float).reshape(-1)
         labels = np.asarray(labels, dtype=int).reshape(-1)
         if len(np.unique(labels)) < 2:
             raise ValueError("Calibration requires both classes")
         if self.method == "platt":
-            self.model_ = LogisticRegression(solver="lbfgs").fit(probabilities.reshape(-1, 1), labels)
+            self.model_ = LogisticRegression(solver="lbfgs").fit(
+                probabilities.reshape(-1, 1), labels
+            )
         elif self.method == "isotonic":
             self.model_ = IsotonicRegression(out_of_bounds="clip").fit(probabilities, labels)
         else:

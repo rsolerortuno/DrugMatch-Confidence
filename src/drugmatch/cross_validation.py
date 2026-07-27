@@ -13,7 +13,6 @@ from drugmatch.evaluation import classification_metrics, regression_metrics
 from drugmatch.models import train_xgboost_classifier, train_xgboost_regressor
 from drugmatch.preprocessing import select_training_features
 
-
 DEFAULT_REGRESSION_PARAMS: dict[str, Any] = {
     "n_estimators": 250,
     "learning_rate": 0.03,
@@ -36,7 +35,11 @@ def cross_validated_predictions(
 ) -> tuple[dict[str, float], dict[str, float], pd.DataFrame, pd.DataFrame]:
     """Return leakage-safe OOF regression and calibrated classification predictions."""
     selected = response[response["drug"].astype(str).str.lower().eq(drug.lower())].copy()
-    selected = selected.dropna(subset=["model_id", "auc"]).drop_duplicates("model_id").set_index("model_id")
+    selected = (
+        selected.dropna(subset=["model_id", "auc"])
+        .drop_duplicates("model_id")
+        .set_index("model_id")
+    )
     common = features.index.intersection(selected.index).intersection(metadata.index)
     X_full = features.loc[common]
     auc = selected.loc[common, "auc"].astype(float)
@@ -100,7 +103,9 @@ def cross_validated_predictions(
             max(
                 thresholds,
                 key=lambda value: classification_metrics(
-                    y_train.loc[calibration_ids].to_numpy(), calibration_probability, threshold=value
+                    y_train.loc[calibration_ids].to_numpy(),
+                    calibration_probability,
+                    threshold=value,
                 )["balanced_accuracy"],
             )
         )
@@ -130,6 +135,9 @@ def cross_validated_predictions(
         threshold=0.5,
     )
     cls_metrics["fold_specific_threshold_accuracy"] = float(
-        (classification_predictions["true_sensitive"] == classification_predictions["predicted_sensitive"]).mean()
+        (
+            classification_predictions["true_sensitive"]
+            == classification_predictions["predicted_sensitive"]
+        ).mean()
     )
     return reg_metrics, cls_metrics, regression_predictions, classification_predictions

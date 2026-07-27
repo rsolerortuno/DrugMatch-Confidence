@@ -28,7 +28,12 @@ from drugmatch.reporting import generate_internal_figures
 from drugmatch.robustness import feature_stability, leave_one_lineage_out, modality_ablation
 from drugmatch.training import train_drug_bundle
 from drugmatch.utils import write_json
-from drugmatch.workflows import PREFERRED_DRUGS, load_aligned_features, run_prism_lineage_demo, run_synthetic_training
+from drugmatch.workflows import (
+    PREFERRED_DRUGS,
+    load_aligned_features,
+    run_prism_lineage_demo,
+    run_synthetic_training,
+)
 
 app = typer.Typer(help="DrugMatch-Confidence: trustworthy preclinical drug-response prediction.")
 data_app = typer.Typer(help="Download, audit and prepare public data.")
@@ -81,9 +86,27 @@ def data_download(
     root = _project_root(root)
     if source.lower() == "prism":
         specs = [
-            DownloadSpec("PRISM", "Secondary Screen", "response", "https://ndownloader.figshare.com/files/20237739", "data/raw/prism/secondary_curve_parameters.csv"),
-            DownloadSpec("PRISM", "Secondary Screen", "cell_line_info", "https://ndownloader.figshare.com/files/20237769", "data/raw/prism/secondary_cell_line_info.csv"),
-            DownloadSpec("PRISM", "Secondary Screen", "treatment_info", "https://ndownloader.figshare.com/files/20237763", "data/raw/prism/secondary_treatment_info.csv"),
+            DownloadSpec(
+                "PRISM",
+                "Secondary Screen",
+                "response",
+                "https://ndownloader.figshare.com/files/20237739",
+                "data/raw/prism/secondary_curve_parameters.csv",
+            ),
+            DownloadSpec(
+                "PRISM",
+                "Secondary Screen",
+                "cell_line_info",
+                "https://ndownloader.figshare.com/files/20237769",
+                "data/raw/prism/secondary_cell_line_info.csv",
+            ),
+            DownloadSpec(
+                "PRISM",
+                "Secondary Screen",
+                "treatment_info",
+                "https://ndownloader.figshare.com/files/20237763",
+                "data/raw/prism/secondary_treatment_info.csv",
+            ),
         ]
     elif source.lower() == "depmap":
         if manifest_csv is None:
@@ -308,7 +331,11 @@ def evaluate_external_command(
             ) from error
     else:
         feature_frame = pd.read_csv(features, index_col=0)
-    external_frame = pd.read_excel(response) if response.suffix.lower() in {".xlsx", ".xls"} else pd.read_csv(response)
+    external_frame = (
+        pd.read_excel(response)
+        if response.suffix.lower() in {".xlsx", ".xls"}
+        else pd.read_csv(response)
+    )
     if "model_id" not in external_frame and depmap_metadata is not None:
         external_frame, _ = map_gdsc_models(external_frame, load_model_metadata(depmap_metadata))
     standardized = standardize_external_response(external_frame, drug)

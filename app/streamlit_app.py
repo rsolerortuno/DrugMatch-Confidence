@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from dataclasses import asdict
 from pathlib import Path
 
 import pandas as pd
@@ -19,7 +18,9 @@ if not model_root.exists():
     model_root = Path("models/demo/synthetic_omics")
 models = sorted(model_root.glob("*.joblib"))
 if not models:
-    st.error("No trained models found. Run `drugmatch train real-release` or `drugmatch train synthetic-demo` first.")
+    st.error(
+        "No trained models found. Run `drugmatch train real-release` or `drugmatch train synthetic-demo` first."
+    )
     st.stop()
 
 selected_model = st.selectbox("Drug model", models, format_func=lambda path: path.stem)
@@ -33,7 +34,9 @@ if mode == "Known demonstration sample":
 else:
     upload = st.file_uploader("Upload one-row CSV", type=["csv"])
     if upload is None:
-        st.info("The CSV may contain a subset of the expected features; absent numerical features are imputed.")
+        st.info(
+            "The CSV may contain a subset of the expected features; absent numerical features are imputed."
+        )
         st.stop()
     input_frame = pd.read_csv(upload)
 
@@ -43,7 +46,9 @@ if st.button("Predict", type="primary"):
     left.metric("Predicted class", result.predicted_class)
     middle.metric("Sensitivity probability", f"{result.sensitivity_probability:.1%}")
     right.metric("Confidence", result.confidence)
-    st.write(f"Continuous-response zone: **{result.response_zone}**; model agreement: **{result.model_agreement}**")
+    st.write(
+        f"Continuous-response zone: **{result.response_zone}**; model agreement: **{result.model_agreement}**"
+    )
     st.write(
         f"Predicted AUC: **{result.predicted_auc:.3f}** "
         f"({result.interval_lower:.3f} to {result.interval_upper:.3f})"

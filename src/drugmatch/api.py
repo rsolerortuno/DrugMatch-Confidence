@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Mapping
 
 import joblib
 import numpy as np
@@ -41,7 +41,7 @@ class DrugMatchPredictor:
         self.bundle = bundle
 
     @classmethod
-    def load(cls, path: str | Path) -> "DrugMatchPredictor":
+    def load(cls, path: str | Path) -> DrugMatchPredictor:
         return cls(joblib.load(path))
 
     @property
@@ -62,14 +62,18 @@ class DrugMatchPredictor:
                 frame[column] = np.nan if column != "meta::lineage" else "unknown"
         return frame[self.expected_features]
 
-    def predict(self, features: pd.DataFrame | pd.Series | Mapping[str, object]) -> PredictionResult:
+    def predict(
+        self, features: pd.DataFrame | pd.Series | Mapping[str, object]
+    ) -> PredictionResult:
         if isinstance(features, pd.Series):
             raw_frame = features.to_frame().T
         elif isinstance(features, pd.DataFrame):
             raw_frame = features.copy()
         else:
             raw_frame = pd.DataFrame([dict(features)])
-        numerical_expected = [column for column in self.expected_features if column != "meta::lineage"]
+        numerical_expected = [
+            column for column in self.expected_features if column != "meta::lineage"
+        ]
         present = [
             column
             for column in numerical_expected
@@ -106,7 +110,11 @@ class DrugMatchPredictor:
         elif feature_coverage < 0.80 and confidence == "high":
             confidence = "moderate"
         drivers = local_explanation(classification, frame, top_n=8).to_dict(orient="records")
-        predicted_class = "sensitive" if probability >= float(self.bundle.get("decision_threshold", 0.5)) else "resistant"
+        predicted_class = (
+            "sensitive"
+            if probability >= float(self.bundle.get("decision_threshold", 0.5))
+            else "resistant"
+        )
         class_thresholds = self.bundle.get("class_thresholds", {})
         sensitive_max = float(class_thresholds.get("sensitive_auc_max", minimum_response))
         resistant_min = float(class_thresholds.get("resistant_auc_min", maximum_response))
@@ -141,6 +149,8 @@ class DrugMatchPredictor:
             missing_feature_count=int(missing_feature_count),
             data_release=self.bundle["data_release"],
             model_status=str(self.bundle.get("validation_status", "unreviewed")),
-            evidence_summary=str(self.bundle.get("evidence_summary", "Validation review not yet attached.")),
+            evidence_summary=str(
+                self.bundle.get("evidence_summary", "Validation review not yet attached.")
+            ),
             disclaimer=self.bundle["disclaimer"],
         )

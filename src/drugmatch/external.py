@@ -10,7 +10,9 @@ from drugmatch.api import DrugMatchPredictor
 from drugmatch.evaluation import classification_metrics
 
 
-def map_gdsc_models(gdsc: pd.DataFrame, depmap_metadata: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
+def map_gdsc_models(
+    gdsc: pd.DataFrame, depmap_metadata: pd.DataFrame
+) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Map GDSC Sanger model IDs to stable DepMap ModelIDs with an audit table."""
     metadata = depmap_metadata.copy()
     if metadata.index.name != "model_id":
@@ -57,7 +59,9 @@ def standardize_external_response(
         raise ValueError(f"External response table is missing columns: {sorted(missing)}")
     selected = frame[frame[drug_column].astype(str).str.lower().eq(drug.lower())].copy()
     selected = selected.dropna(subset=[model_column, response_column])
-    selected = selected.rename(columns={model_column: "model_id", response_column: "external_response"})
+    selected = selected.rename(
+        columns={model_column: "model_id", response_column: "external_response"}
+    )
     selected["model_id"] = selected["model_id"].astype(str)
     return selected.groupby("model_id", as_index=False)["external_response"].median()
 
@@ -74,7 +78,9 @@ def validate_external(
     if allowed_model_ids is not None:
         common = common.intersection(pd.Index(allowed_model_ids))
     if len(common) < 20:
-        raise ValueError(f"External validation requires at least 20 overlapping models; found {len(common)}")
+        raise ValueError(
+            f"External validation requires at least 20 overlapping models; found {len(common)}"
+        )
     frame = predictor._frame(features.loc[common])
     regression = predictor.bundle["regression"]
     classification = predictor.bundle["classification"]

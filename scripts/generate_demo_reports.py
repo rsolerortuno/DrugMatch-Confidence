@@ -11,7 +11,6 @@ import pandas as pd
 
 from drugmatch.api import DrugMatchPredictor
 
-
 ROOT = Path(__file__).resolve().parents[1]
 
 

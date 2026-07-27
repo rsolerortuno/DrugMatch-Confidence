@@ -14,7 +14,6 @@ from drugmatch.preprocessing import OmicsTables, assemble_features
 from drugmatch.robustness import feature_stability, leave_one_lineage_out, modality_ablation
 from drugmatch.synthetic import generate_synthetic_omics
 
-
 ROOT = Path(__file__).resolve().parents[1]
 PARAMS = {"n_estimators": 50, "n_jobs": 2}
 
@@ -44,9 +43,9 @@ def main() -> None:
     internal.mkdir(parents=True, exist_ok=True)
     external.mkdir(parents=True, exist_ok=True)
 
-    modality_ablation(
-        features, response, metadata, "trametinib", model_params=PARAMS
-    ).to_csv(interpretation / "trametinib_synthetic_modality_ablation.csv", index=False)
+    modality_ablation(features, response, metadata, "trametinib", model_params=PARAMS).to_csv(
+        interpretation / "trametinib_synthetic_modality_ablation.csv", index=False
+    )
     feature_stability(
         features, response, "trametinib", n_splits=3, top_n=20, model_params=PARAMS
     ).to_csv(interpretation / "trametinib_synthetic_feature_stability.csv", index=False)

@@ -25,7 +25,9 @@ def grouped_split(
         raise ValueError("At least ten unique model identifiers are required")
     strat_values = None
     if stratify is not None:
-        strat_values = stratify.reindex(ids).map(lambda value: "unknown" if pd.isna(value) else str(value))
+        strat_values = stratify.reindex(ids).map(
+            lambda value: "unknown" if pd.isna(value) else str(value)
+        )
         if strat_values.value_counts().min() < 2:
             strat_values = None
     train_ids, remaining = train_test_split(

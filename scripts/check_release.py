@@ -7,7 +7,6 @@ from pathlib import Path
 
 from drugmatch.api import DrugMatchPredictor
 
-
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = [
     "README.md",

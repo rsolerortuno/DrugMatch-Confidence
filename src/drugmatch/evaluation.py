@@ -55,8 +55,12 @@ def classification_metrics(
         "mcc": float(matthews_corrcoef(y_true, predicted)),
         "brier": float(brier_score_loss(y_true, probs)),
     }
-    metrics["auroc"] = float(roc_auc_score(y_true, probs)) if len(np.unique(y_true)) == 2 else float("nan")
+    metrics["auroc"] = (
+        float(roc_auc_score(y_true, probs)) if len(np.unique(y_true)) == 2 else float("nan")
+    )
     metrics["auprc"] = (
-        float(average_precision_score(y_true, probs)) if len(np.unique(y_true)) == 2 else float("nan")
+        float(average_precision_score(y_true, probs))
+        if len(np.unique(y_true)) == 2
+        else float("nan")
     )
     return metrics

@@ -23,7 +23,9 @@ def test_modality_ablation_and_stability(tmp_path: Path) -> None:
     features, response, metadata = _data(tmp_path)
     params = {"n_estimators": 10, "n_jobs": 1}
     ablation = modality_ablation(features, response, metadata, "trametinib", model_params=params)
-    stability = feature_stability(features, response, "trametinib", n_splits=2, top_n=5, model_params=params)
+    stability = feature_stability(
+        features, response, "trametinib", n_splits=2, top_n=5, model_params=params
+    )
     assert "all_modalities" in set(ablation["ablation"])
     assert not stability.empty
     assert stability["frequency_fraction"].between(0, 1).all()
@@ -39,4 +41,6 @@ def test_lineage_holdout_returns_schema(tmp_path: Path) -> None:
         min_lineage_models=20,
         model_params={"n_estimators": 10, "n_jobs": 1},
     )
-    assert set(["held_out_lineage", "regression_spearman", "classification_auroc"]).issubset(result.columns)
+    assert set(["held_out_lineage", "regression_spearman", "classification_auroc"]).issubset(
+        result.columns
+    )

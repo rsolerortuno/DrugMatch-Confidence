@@ -17,13 +17,17 @@ class PCADistanceOOD:
     caution_quantile: float = 0.95
     ood_quantile: float = 0.99
 
-    def fit(self, X: np.ndarray) -> "PCADistanceOOD":
+    def fit(self, X: np.ndarray) -> PCADistanceOOD:
         values = np.asarray(X, dtype=float)
         if values.ndim != 2 or len(values) < 10:
-            raise ValueError("OOD fitting requires a two-dimensional matrix with at least ten samples")
+            raise ValueError(
+                "OOD fitting requires a two-dimensional matrix with at least ten samples"
+            )
         self.scaler_ = StandardScaler().fit(values)
         standardized = self.scaler_.transform(values)
-        components = min(self.n_components, standardized.shape[1], max(1, standardized.shape[0] - 1))
+        components = min(
+            self.n_components, standardized.shape[1], max(1, standardized.shape[0] - 1)
+        )
         self.pca_ = PCA(n_components=components, random_state=0).fit(standardized)
         embedding = self.pca_.transform(standardized)
         self.center_ = embedding.mean(axis=0)

@@ -13,10 +13,12 @@ class SplitConformalInterval:
 
     coverage: float = 0.90
 
-    def fit(self, true_values: np.ndarray, predictions: np.ndarray) -> "SplitConformalInterval":
+    def fit(self, true_values: np.ndarray, predictions: np.ndarray) -> SplitConformalInterval:
         if not 0 < self.coverage < 1:
             raise ValueError("Coverage must be between zero and one")
-        residuals = np.abs(np.asarray(true_values, dtype=float) - np.asarray(predictions, dtype=float))
+        residuals = np.abs(
+            np.asarray(true_values, dtype=float) - np.asarray(predictions, dtype=float)
+        )
         if residuals.size < 5:
             raise ValueError("At least five calibration residuals are required")
         quantile = min(1.0, np.ceil((residuals.size + 1) * self.coverage) / residuals.size)

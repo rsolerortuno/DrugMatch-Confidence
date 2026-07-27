@@ -42,8 +42,9 @@ def evaluate_baselines(
         ),
         "majority_classification": classification_metrics(
             y.loc[test_class_ids, "binary_class"].astype(int),
-            classifiers["majority"].predict_proba([[0]] * len(test_class_ids))[:,
-                list(classifiers["majority"].classes_).index(1)],
+            classifiers["majority"].predict_proba([[0]] * len(test_class_ids))[
+                :, list(classifiers["majority"].classes_).index(1)
+            ],
         ),
         "elastic_net_classification": classification_metrics(
             y.loc[test_class_ids, "binary_class"].astype(int),
@@ -58,8 +59,6 @@ def evaluate_baselines(
     if "lineage" in classifiers:
         results["lineage_classification"] = classification_metrics(
             y.loc[test_class_ids, "binary_class"].astype(int),
-            classifiers["lineage"].predict_proba(
-                X.loc[test_class_ids, ["meta::lineage"]]
-            )[:, 1],
+            classifiers["lineage"].predict_proba(X.loc[test_class_ids, ["meta::lineage"]])[:, 1],
         )
     return results

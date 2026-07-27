@@ -77,7 +77,9 @@ def modality_ablation(
             classification_params=model_params,
             seed=seed,
         )
-        reg = regression_metrics(y.loc[test_ids, "auc"], regression.predict(X.loc[test_ids, columns]))
+        reg = regression_metrics(
+            y.loc[test_ids, "auc"], regression.predict(X.loc[test_ids, columns])
+        )
         probs = classification.predict_proba(X.loc[test_class_ids, columns])[:, 1]
         cls = classification_metrics(y.loc[test_class_ids, "binary_class"].astype(int), probs)
         rows.append(
@@ -117,7 +119,10 @@ def leave_one_lineage_out(
         test_class_ids = y.loc[test_ids].dropna(subset=["binary_class"]).index
         if len(train_class_ids) < 30 or len(test_class_ids) < 8:
             continue
-        if y.loc[train_class_ids, "binary_class"].nunique() < 2 or y.loc[test_class_ids, "binary_class"].nunique() < 2:
+        if (
+            y.loc[train_class_ids, "binary_class"].nunique() < 2
+            or y.loc[test_class_ids, "binary_class"].nunique() < 2
+        ):
             continue
         columns, _ = select_training_features(X_full.loc[train_ids], drug)
         X = X_full[columns]
@@ -135,9 +140,9 @@ def leave_one_lineage_out(
         cls = classification_metrics(y.loc[test_class_ids, "binary_class"].astype(int), cls_prob)
         transformed_train = regression.named_steps["preprocess"].transform(X.loc[train_ids])
         transformed_test = regression.named_steps["preprocess"].transform(X.loc[test_ids])
-        detector = PCADistanceOOD(n_components=min(8, transformed_train.shape[1], len(train_ids) - 1)).fit(
-            transformed_train
-        )
+        detector = PCADistanceOOD(
+            n_components=min(8, transformed_train.shape[1], len(train_ids) - 1)
+        ).fit(transformed_train)
         ood_labels = detector.label(transformed_test)
         rows.append(
             {
