@@ -6,7 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Models: DepMap 26Q1](https://img.shields.io/badge/models-DepMap%2026Q1-green.svg)](https://depmap.org/portal/data_page/?tab=currentRelease)
 
-## The idea in plain language
+## The idea
 
 Cancer cell lines are laboratory models of tumours. Researchers can measure thousands of genes in each model and experimentally test whether a drug kills it. DrugMatch-Confidence learns the relationship between those molecular measurements and the observed response to a drug.
 
