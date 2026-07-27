@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Iterable
 
 import numpy as np
 import pandas as pd
@@ -31,9 +30,14 @@ def _prefix(frame: pd.DataFrame | None, prefix: str) -> pd.DataFrame | None:
     return output
 
 
-def assemble_features(tables: OmicsTables, model_ids: list[str] | pd.Index | None = None) -> pd.DataFrame:
+def assemble_features(
+    tables: OmicsTables, model_ids: list[str] | pd.Index | None = None
+) -> pd.DataFrame:
     """Join modality matrices without fitting any data-dependent transformation."""
-    frames: list[pd.DataFrame] = [_prefix(tables.expression, "expr")]  # type: ignore[list-item]
+    expression = _prefix(tables.expression, "expr")
+    if expression is None:
+        raise AssertionError("Expression data unexpectedly resolved to None")
+    frames: list[pd.DataFrame] = [expression]
     for frame, prefix in [
         (tables.mutations, "mut"),
         (tables.copy_number, "cn"),
@@ -60,9 +64,42 @@ def assemble_features(tables: OmicsTables, model_ids: list[str] | pd.Index | Non
 
 DRUG_BIOLOGY_GENES: dict[str, set[str]] = {
     "trametinib": {"BRAF", "KRAS", "NRAS", "NF1", "MAP2K1", "MAP2K2", "DUSP6", "SPRY2", "EGFR"},
-    "afatinib": {"EGFR", "ERBB2", "ERBB3", "ERBB4", "KRAS", "NRAS", "BRAF", "PIK3CA", "PTEN", "MET"},
-    "palbociclib": {"RB1", "CDKN2A", "CDKN2B", "CCND1", "CCND2", "CCND3", "CDK4", "CDK6", "E2F1", "TP53"},
-    "olaparib": {"BRCA1", "BRCA2", "PALB2", "RAD51C", "RAD51D", "ATM", "ATR", "CHEK1", "CHEK2", "ARID1A"},
+    "afatinib": {
+        "EGFR",
+        "ERBB2",
+        "ERBB3",
+        "ERBB4",
+        "KRAS",
+        "NRAS",
+        "BRAF",
+        "PIK3CA",
+        "PTEN",
+        "MET",
+    },
+    "palbociclib": {
+        "RB1",
+        "CDKN2A",
+        "CDKN2B",
+        "CCND1",
+        "CCND2",
+        "CCND3",
+        "CDK4",
+        "CDK6",
+        "E2F1",
+        "TP53",
+    },
+    "olaparib": {
+        "BRCA1",
+        "BRCA2",
+        "PALB2",
+        "RAD51C",
+        "RAD51D",
+        "ATM",
+        "ATR",
+        "CHEK1",
+        "CHEK2",
+        "ARID1A",
+    },
     "gemcitabine": {"DCK", "CDA", "RRM1", "RRM2", "SLC29A1", "SLC28A1", "CMPK1", "TYMS", "NT5C2"},
 }
 
@@ -111,8 +148,10 @@ def select_training_features(
         forced_set = set(forced)
         variances = X_train[chosen].var(axis=0, skipna=True) if chosen else pd.Series(dtype=float)
         for column in chosen:
-            reason = "variance+biology" if column in variance_set and column in forced_set else (
-                "biology" if column in forced_set else "variance"
+            reason = (
+                "variance+biology"
+                if column in variance_set and column in forced_set
+                else ("biology" if column in forced_set else "variance")
             )
             rows.append(
                 {
@@ -185,7 +224,9 @@ def build_preprocessor(
         )
     if not transformers:
         raise ValueError("No supported feature columns were found")
-    return ColumnTransformer(transformers=transformers, remainder="drop", verbose_feature_names_out=True)
+    return ColumnTransformer(
+        transformers=transformers, remainder="drop", verbose_feature_names_out=True
+    )
 
 
 class TopVarianceFeatures(BaseEstimator, TransformerMixin):
@@ -194,7 +235,7 @@ class TopVarianceFeatures(BaseEstimator, TransformerMixin):
     def __init__(self, max_features: int = 300):
         self.max_features = max_features
 
-    def fit(self, X: np.ndarray, y: object = None) -> "TopVarianceFeatures":
+    def fit(self, X: np.ndarray, y: object = None) -> TopVarianceFeatures:
         array = np.asarray(X, dtype=float)
         variances = np.nanvar(array, axis=0)
         order = np.argsort(variances)[::-1]
@@ -217,7 +258,9 @@ class TopVarianceFeatures(BaseEstimator, TransformerMixin):
         if not hasattr(self, "indices_"):
             raise RuntimeError("TopVarianceFeatures has not been fitted")
         if input_features is None:
-            names = np.asarray([f"feature_{index}" for index in range(self.n_features_in_)], dtype=object)
+            names = np.asarray(
+                [f"feature_{index}" for index in range(self.n_features_in_)], dtype=object
+            )
         else:
             names = np.asarray(input_features, dtype=object)
         return names[self.indices_]

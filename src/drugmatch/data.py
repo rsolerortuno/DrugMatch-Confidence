@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import shutil
 import urllib.request
+from collections.abc import Iterable, Sequence
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable, Sequence
 
 import numpy as np
 import pandas as pd
@@ -43,7 +43,9 @@ def stream_download(url: str, destination: str | Path, force: bool = False) -> P
     return output
 
 
-def download_specs(specs: Iterable[DownloadSpec], root: str | Path, force: bool = False) -> list[dict]:
+def download_specs(
+    specs: Iterable[DownloadSpec], root: str | Path, force: bool = False
+) -> list[dict]:
     """Download a collection and return a reproducible manifest."""
     root_path = Path(root)
     records: list[dict] = []
@@ -80,7 +82,9 @@ def parse_depmap_download_manifest(path: str | Path, release: str) -> dict[str, 
     selected = frame.copy()
     if release_col:
         selected = selected[selected[release_col].astype(str).eq(release)]
-    return dict(zip(selected[filename_col].astype(str), selected[url_col].astype(str), strict=False))
+    return dict(
+        zip(selected[filename_col].astype(str), selected[url_col].astype(str), strict=False)
+    )
 
 
 def _truthy_mask(series: pd.Series) -> pd.Series:
@@ -88,11 +92,7 @@ def _truthy_mask(series: pd.Series) -> pd.Series:
     if pd.api.types.is_bool_dtype(series):
         return series.fillna(False)
     return (
-        series.fillna("")
-        .astype(str)
-        .str.strip()
-        .str.lower()
-        .isin({"yes", "true", "1", "y", "t"})
+        series.fillna("").astype(str).str.strip().str.lower().isin({"yes", "true", "1", "y", "t"})
     )
 
 
@@ -130,13 +130,20 @@ def load_prism_response(path: str | Path) -> pd.DataFrame:
 def load_model_metadata(path: str | Path) -> pd.DataFrame:
     """Load model metadata from current DepMap or legacy PRISM schemas."""
     frame = pd.read_csv(path, low_memory=False)
-    id_col = next((c for c in ["ModelID", "model_id", "depmap_id", "DepMap_ID", "row_name"] if c in frame), None)
+    id_col = next(
+        (c for c in ["ModelID", "model_id", "depmap_id", "DepMap_ID", "row_name"] if c in frame),
+        None,
+    )
     if id_col is None:
         raise ValueError("Could not identify a model identifier column")
     frame = frame.rename(columns={id_col: "model_id"})
     frame["model_id"] = frame["model_id"].astype(str)
     lineage_col = next(
-        (c for c in ["OncotreeLineage", "primary_tissue", "lineage", "PrimaryDisease"] if c in frame),
+        (
+            c
+            for c in ["OncotreeLineage", "primary_tissue", "lineage", "PrimaryDisease"]
+            if c in frame
+        ),
         None,
     )
     if lineage_col and lineage_col != "lineage":
@@ -161,7 +168,11 @@ def load_wide_omics(
     """
     frame = pd.read_csv(path, low_memory=False)
     id_col = next(
-        (c for c in ["ModelID", "model_id", "DepMap_ID", "row_name", "Unnamed: 0", "ProfileID"] if c in frame),
+        (
+            c
+            for c in ["ModelID", "model_id", "DepMap_ID", "row_name", "Unnamed: 0", "ProfileID"]
+            if c in frame
+        ),
         None,
     )
     if id_col is None:
@@ -199,7 +210,7 @@ def load_wide_omics(
     for column in object_columns:
         frame[column] = pd.to_numeric(frame[column], errors="coerce")
     frame = frame.replace([np.inf, -np.inf], np.nan)
-    return frame.astype(dtype, copy=False)
+    return frame.astype(dtype)
 
 
 def combine_mutation_matrices(

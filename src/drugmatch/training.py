@@ -10,6 +10,7 @@ import joblib
 import numpy as np
 import pandas as pd
 from sklearn.metrics import balanced_accuracy_score, brier_score_loss
+from sklearn.pipeline import Pipeline
 
 from drugmatch.calibration import ProbabilityCalibrator
 from drugmatch.evaluation import classification_metrics, regression_metrics
@@ -24,7 +25,6 @@ from drugmatch.preprocessing import select_training_features
 from drugmatch.splitting import grouped_split
 from drugmatch.uncertainty import SplitConformalInterval
 from drugmatch.utils import stable_json_hash, write_json
-
 
 DISCLAIMER = (
     "For preclinical research use only. Predictions concern cancer cell-line models and must not "
@@ -100,10 +100,10 @@ def _select_regressor(
     seed: int,
     tune: bool,
     override: dict[str, Any] | None,
-) -> tuple[object, dict[str, Any], pd.DataFrame]:
+) -> tuple[Pipeline, dict[str, Any], pd.DataFrame]:
     candidates = _regression_candidates() if tune else [{}]
     rows: list[dict[str, Any]] = []
-    fitted: list[object] = []
+    fitted: list[Pipeline] = []
     for index, candidate in enumerate(candidates):
         params = dict(candidate)
         params.update(override or {})
@@ -125,10 +125,10 @@ def _select_classifier(
     seed: int,
     tune: bool,
     override: dict[str, Any] | None,
-) -> tuple[object, dict[str, Any], pd.DataFrame]:
+) -> tuple[Pipeline, dict[str, Any], pd.DataFrame]:
     candidates = _classification_candidates() if tune else [{}]
     rows: list[dict[str, Any]] = []
-    fitted: list[object] = []
+    fitted: list[Pipeline] = []
     for index, candidate in enumerate(candidates):
         params = dict(candidate)
         params.update(override or {})
@@ -157,12 +157,16 @@ def train_drug_bundle(
 ) -> TrainingOutcome:
     """Train, tune, calibrate, evaluate and serialize all artifacts for one drug."""
     selected_response = response[response["drug"].astype(str).str.lower().eq(drug.lower())].copy()
-    selected_response = selected_response.dropna(subset=["model_id", "auc"]).drop_duplicates("model_id")
+    selected_response = selected_response.dropna(subset=["model_id", "auc"]).drop_duplicates(
+        "model_id"
+    )
     selected_response["model_id"] = selected_response["model_id"].astype(str)
     selected_response = selected_response.set_index("model_id")
     common = features.index.intersection(selected_response.index).intersection(metadata.index)
     if len(common) < 80:
-        raise ValueError(f"Drug {drug!r} has only {len(common)} models with complete requested modalities")
+        raise ValueError(
+            f"Drug {drug!r} has only {len(common)} models with complete requested modalities"
+        )
     X_full = features.loc[common]
     auc = selected_response.loc[common, "auc"].astype(float)
     meta = metadata.loc[common].copy()
@@ -185,7 +189,9 @@ def train_drug_bundle(
         "test": test_cls_ids,
     }.items():
         if len(ids) < 10 or y.loc[ids, "binary_class"].nunique() < 2:
-            raise ValueError(f"{drug}: {partition} split does not contain enough sensitive and resistant models")
+            raise ValueError(
+                f"{drug}: {partition} split does not contain enough sensitive and resistant models"
+            )
 
     selected_columns, feature_manifest = select_training_features(X_full.loc[train_ids], drug)
     X = X_full[selected_columns].copy()
@@ -218,14 +224,18 @@ def train_drug_bundle(
     )
 
     validation_reg_pred = regression.predict(X_validation)
-    conformal = SplitConformalInterval(coverage=0.90).fit(y_validation_reg.to_numpy(), validation_reg_pred)
+    conformal = SplitConformalInterval(coverage=0.90).fit(
+        y_validation_reg.to_numpy(), validation_reg_pred
+    )
     test_reg_pred = regression.predict(X_test)
     test_lower, test_upper = conformal.predict(test_reg_pred)
     regression_result = regression_metrics(y_test_reg.to_numpy(), test_reg_pred)
     coverage = conformal.empirical_coverage(y_test_reg.to_numpy(), test_reg_pred)
 
     raw_validation_probs = classification.predict_proba(X.loc[validation_cls_ids])[:, 1]
-    platt = ProbabilityCalibrator(method="platt").fit(raw_validation_probs, y_validation_cls.to_numpy())
+    platt = ProbabilityCalibrator(method="platt").fit(
+        raw_validation_probs, y_validation_cls.to_numpy()
+    )
     calibration_candidates = [platt]
     if len(validation_cls_ids) >= 80:
         calibration_candidates.append(
@@ -369,7 +379,9 @@ def train_drug_bundle(
     classification_tuning.assign(params=classification_tuning["params"].astype(str)).to_csv(
         output / f"{stem}_classification_tuning.csv", index=False
     )
-    regression_predictions.to_csv(output / f"{stem}_internal_regression_predictions.csv", index=False)
+    regression_predictions.to_csv(
+        output / f"{stem}_internal_regression_predictions.csv", index=False
+    )
     classification_predictions.to_csv(
         output / f"{stem}_internal_classification_predictions.csv", index=False
     )

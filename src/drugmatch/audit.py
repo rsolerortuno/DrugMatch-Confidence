@@ -42,7 +42,6 @@ def audit_drugs(
     screened_universe = int(response.groupby("drug")["model_id"].nunique().max())
     records: list[dict] = []
     for drug, group in joined.groupby("drug", sort=True):
-        total_rows = len(group)
         usable = group.dropna(subset=["auc", "model_id"]).drop_duplicates("model_id")
         n_models = usable["model_id"].nunique()
         missing_fraction = 1.0 - (n_models / max(screened_universe, 1))

@@ -5,9 +5,10 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 import shap
+from sklearn.pipeline import Pipeline
 
 
-def transformed_feature_names(pipeline: object) -> list[str]:
+def transformed_feature_names(pipeline: Pipeline) -> list[str]:
     """Extract transformed column names from a fitted scikit-learn pipeline."""
     preprocessor = pipeline.named_steps["preprocess"]
     try:
@@ -17,7 +18,7 @@ def transformed_feature_names(pipeline: object) -> list[str]:
         return [f"feature_{index}" for index in range(width)]
 
 
-def shap_values(pipeline: object, X: pd.DataFrame) -> tuple[np.ndarray, list[str]]:
+def shap_values(pipeline: Pipeline, X: pd.DataFrame) -> tuple[np.ndarray, list[str]]:
     """Calculate SHAP values for a fitted tree model."""
     transformed = pipeline.named_steps["preprocess"].transform(X)
     model = pipeline.named_steps["model"]
@@ -28,7 +29,7 @@ def shap_values(pipeline: object, X: pd.DataFrame) -> tuple[np.ndarray, list[str
     return np.asarray(values), transformed_feature_names(pipeline)
 
 
-def global_importance(pipeline: object, X: pd.DataFrame) -> pd.DataFrame:
+def global_importance(pipeline: Pipeline, X: pd.DataFrame) -> pd.DataFrame:
     """Return mean absolute SHAP importance."""
     values, names = shap_values(pipeline, X)
     importance = np.abs(values).mean(axis=0)
@@ -37,7 +38,7 @@ def global_importance(pipeline: object, X: pd.DataFrame) -> pd.DataFrame:
     )
 
 
-def local_explanation(pipeline: object, X: pd.DataFrame, top_n: int = 10) -> pd.DataFrame:
+def local_explanation(pipeline: Pipeline, X: pd.DataFrame, top_n: int = 10) -> pd.DataFrame:
     """Return signed local drivers for the first sample."""
     values, names = shap_values(pipeline, X.iloc[[0]])
     frame = pd.DataFrame({"feature": names, "shap_value": values[0]})

@@ -8,6 +8,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from matplotlib.figure import Figure
 from sklearn.calibration import calibration_curve
 from sklearn.metrics import (
     accuracy_score,
@@ -22,7 +23,7 @@ def _stem(drug: str) -> str:
     return drug.lower().replace(" ", "_")
 
 
-def _save(fig: object, path: Path) -> None:
+def _save(fig: Figure, path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     fig.tight_layout()
     fig.savefig(path, dpi=180, bbox_inches="tight")
@@ -83,7 +84,9 @@ def generate_internal_figures(
         ax_roc.plot(fpr, tpr, label=f"{drug.title()} (AUC {auroc:.2f})")
         precision, recall, _ = precision_recall_curve(true, probs)
         ax_pr.plot(recall, precision, label=drug.title())
-        fraction_positive, mean_predicted = calibration_curve(true, probs, n_bins=6, strategy="quantile")
+        fraction_positive, mean_predicted = calibration_curve(
+            true, probs, n_bins=6, strategy="quantile"
+        )
         ax_cal.plot(mean_predicted, fraction_positive, marker="o", label=drug.title())
 
         accuracy_values = []
@@ -132,9 +135,13 @@ def generate_internal_figures(
                 "brier": metrics["classification"]["brier"],
                 "interval_coverage": metrics["interval_coverage"],
                 "elastic_net_auroc": metrics["baselines"]["elastic_net_classification"]["auroc"],
-                "lineage_auroc": metrics["baselines"].get("lineage_classification", {}).get("auroc", np.nan),
+                "lineage_auroc": metrics["baselines"]
+                .get("lineage_classification", {})
+                .get("auroc", np.nan),
                 "elastic_net_spearman": metrics["baselines"]["elastic_net_regression"]["spearman"],
-                "lineage_spearman": metrics["baselines"].get("lineage_regression", {}).get("spearman", np.nan),
+                "lineage_spearman": metrics["baselines"]
+                .get("lineage_regression", {})
+                .get("spearman", np.nan),
             }
         )
 
@@ -176,7 +183,9 @@ def generate_internal_figures(
         ax_cmp.bar(positions, summary["elastic_net_auroc"], width, label="Elastic Net")
         ax_cmp.bar(positions + width, summary["classification_auroc"], width, label="XGBoost")
         ax_cmp.set_xticks(positions)
-        ax_cmp.set_xticklabels([str(value).title() for value in summary["drug"]], rotation=25, ha="right")
+        ax_cmp.set_xticklabels(
+            [str(value).title() for value in summary["drug"]], rotation=25, ha="right"
+        )
         ax_cmp.set_ylabel("Held-out AUROC")
         ax_cmp.set_ylim(0, 1.05)
         ax_cmp.set_title("Does molecular XGBoost beat simpler baselines?")
@@ -215,7 +224,9 @@ def generate_external_figures(
             predicted = (probs >= threshold).astype(int)
             balanced = balanced_accuracy_score(true, predicted)
             balanced_values.append(balanced)
-            threshold_rows.append({"drug": drug, "threshold": float(threshold), "balanced_accuracy": float(balanced)})
+            threshold_rows.append(
+                {"drug": drug, "threshold": float(threshold), "balanced_accuracy": float(balanced)}
+            )
         ax_acc.plot(thresholds, balanced_values, label=drug.title())
         rows.append(
             {
@@ -228,7 +239,9 @@ def generate_external_figures(
             }
         )
         fig_scatter, ax_scatter = plt.subplots(figsize=(6.2, 5.6))
-        ax_scatter.scatter(predictions["external_response"], predictions["predicted_auc"], alpha=0.75)
+        ax_scatter.scatter(
+            predictions["external_response"], predictions["predicted_auc"], alpha=0.75
+        )
         ax_scatter.set_xlabel("Measured GDSC2 AUC")
         ax_scatter.set_ylabel("PRISM-trained predicted AUC")
         ax_scatter.set_title(f"{drug.title()}: external assay transfer ({suffix})")
@@ -244,7 +257,9 @@ def generate_external_figures(
     ax_acc.set_title(f"GDSC2 accuracy across thresholds: {suffix.replace('_', ' ')}")
     ax_acc.legend(fontsize=8)
     _save(fig_acc, output / f"external_accuracy_threshold_curves_{suffix}.png")
-    pd.DataFrame(threshold_rows).to_csv(output / f"external_accuracy_by_threshold_{suffix}.csv", index=False)
+    pd.DataFrame(threshold_rows).to_csv(
+        output / f"external_accuracy_by_threshold_{suffix}.csv", index=False
+    )
     summary = pd.DataFrame(rows)
     summary.to_csv(output / f"external_roc_summary_{suffix}.csv", index=False)
     return summary
@@ -297,14 +312,20 @@ def generate_oof_figures(
                 "n_regression": payload["n_regression"],
                 "n_classification": payload["n_classification"],
                 **{f"regression_{key}": value for key, value in payload["regression"].items()},
-                **{f"classification_{key}": value for key, value in payload["classification"].items()},
+                **{
+                    f"classification_{key}": value
+                    for key, value in payload["classification"].items()
+                },
                 "classification_auroc_ci_lower": ci_lower,
                 "classification_auroc_ci_upper": ci_upper,
             }
         )
         fig_reg, ax_reg = plt.subplots(figsize=(6.2, 5.6))
         ax_reg.scatter(reg["true_auc"], reg["predicted_auc"], alpha=0.7)
-        limits = [min(reg["true_auc"].min(), reg["predicted_auc"].min()), max(reg["true_auc"].max(), reg["predicted_auc"].max())]
+        limits = [
+            min(reg["true_auc"].min(), reg["predicted_auc"].min()),
+            max(reg["true_auc"].max(), reg["predicted_auc"].max()),
+        ]
         ax_reg.plot(limits, limits, linestyle="--")
         ax_reg.set_xlabel("Measured PRISM AUC")
         ax_reg.set_ylabel("Out-of-fold predicted AUC")
