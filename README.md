@@ -1,10 +1,10 @@
-# DrugMatch-Confidence
-
-**An interpretable XGBoost tool that predicts drug sensitivity in preclinical cancer cell lines and reports when its prediction should not be trusted.**
-
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Models: DepMap 26Q1](https://img.shields.io/badge/models-DepMap%2026Q1-green.svg)](https://depmap.org/portal/data_page/?tab=currentRelease)
+
+# DrugMatch-Confidence
+
+**An interpretable XGBoost tool that predicts drug sensitivity in preclinical cancer cell lines and reports when its prediction should not be trusted.**
 
 ## The idea
 
