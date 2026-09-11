@@ -13,7 +13,9 @@ st.set_page_config(page_title="DrugMatch-Confidence", page_icon="🧬", layout="
 st.title("DrugMatch-Confidence")
 st.caption("Preclinical drug-response prediction with calibrated uncertainty and OOD warnings.")
 
-model_root = Path("models/real/depmap_26q1_prism")
+model_root = Path("models/review/depmap_26q1_prism")
+if not model_root.exists():
+    model_root = Path("models/real/depmap_26q1_prism")
 if not model_root.exists():
     model_root = Path("models/demo/synthetic_omics")
 models = sorted(model_root.glob("*.joblib"))
@@ -26,6 +28,9 @@ if not models:
 selected_model = st.selectbox("Drug model", models, format_func=lambda path: path.stem)
 predictor = DrugMatchPredictor.load(selected_model)
 reference = predictor.bundle["training_reference"]
+st.caption(
+    "Demonstration samples come from model fitting and do not measure predictive performance."
+)
 mode = st.radio("Input mode", ["Known demonstration sample", "Upload CSV"])
 
 if mode == "Known demonstration sample":
@@ -43,7 +48,13 @@ else:
 if st.button("Predict", type="primary"):
     result = predictor.predict(input_frame)
     left, middle, right = st.columns(3)
-    left.metric("Predicted class", result.predicted_class)
+    if result.abstain:
+        st.warning(
+            "Insufficient evidence for a screening decision: "
+            + ", ".join(result.abstention_reasons)
+        )
+    st.caption(result.probability_scope)
+    left.metric("Screening decision", result.decision)
     middle.metric("Sensitivity probability", f"{result.sensitivity_probability:.1%}")
     right.metric("Confidence", result.confidence)
     st.write(

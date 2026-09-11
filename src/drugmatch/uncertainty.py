@@ -21,8 +21,19 @@ class SplitConformalInterval:
         )
         if residuals.size < 5:
             raise ValueError("At least five calibration residuals are required")
-        quantile = min(1.0, np.ceil((residuals.size + 1) * self.coverage) / residuals.size)
-        self.radius_ = float(np.quantile(residuals, quantile, method="higher"))
+        if np.asarray(true_values).shape != np.asarray(predictions).shape:
+            raise ValueError("Calibration arrays must have the same shape")
+        if residuals.ndim != 1 or not np.isfinite(residuals).all():
+            raise ValueError("Calibration residuals must be finite and one-dimensional")
+        self.calibration_residuals_ = residuals.copy()
+        # Exact one-based finite-sample order statistic. The extra infinity is
+        # essential when n cannot support the requested coverage.
+        rank = int(np.ceil((residuals.size + 1) * self.coverage))
+        self.radius_ = (
+            float(np.partition(residuals, rank - 1)[rank - 1])
+            if rank <= residuals.size
+            else float("inf")
+        )
         return self
 
     def predict(self, predictions: np.ndarray) -> tuple[np.ndarray, np.ndarray]:

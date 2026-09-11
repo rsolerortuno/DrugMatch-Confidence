@@ -133,7 +133,7 @@ def observed_assay_concordance(
     external_response: pd.DataFrame,
     drug: str,
 ) -> tuple[dict[str, float], pd.DataFrame]:
-    """Measure direct PRISM-versus-external response agreement as a transfer ceiling."""
+    """Measure direct PRISM-versus-external response agreement as a descriptive transfer reference, not a hard ceiling."""
     prism = prism_response[prism_response["drug"].astype(str).str.lower().eq(drug.lower())][
         ["model_id", "auc"]
     ].drop_duplicates("model_id")

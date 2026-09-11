@@ -1,7 +1,8 @@
 {
   "project": "DrugMatch-Confidence",
-  "version": "1.0.0",
-  "file_count": 259,
+  "version": "1.1.0.dev0",
+  "scope": "Tracked scientific-audit and CI-ready artifacts; raw omics excluded; this manifest excludes itself.",
+  "file_count": 360,
   "files": [
     {
       "path": ".dockerignore",
@@ -10,8 +11,8 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "bytes": 1454,
-      "sha256": "c7a6d27c8da42eb2ae6e7a8a2a4ea906848d3479314390c109b72393ac525578"
+      "bytes": 1903,
+      "sha256": "55c39af01dc82b3cc8eec66093528a99b13e5dee4484615b8914e69da37a0e63"
     },
     {
       "path": ".gitignore",
@@ -21,27 +22,27 @@
     {
       "path": ".pre-commit-config.yaml",
       "bytes": 153,
-      "sha256": "70930e5ef294525db98fe9837c46dccbe239df6cb55f88f8c1a5e1836386c615"
+      "sha256": "1215a679368400ae823a40134b882fc4b53646089e86de280c5efb0d27547f44"
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 1259,
-      "sha256": "429799f47619e72b7124ca004085c305359d10aba9e9558e1e7234ddc07cb891"
+      "bytes": 2769,
+      "sha256": "981dbcb3f17b54652e991a25353b772932f18464f8805dc3627921cf1e9856cc"
     },
     {
       "path": "CITATION.cff",
-      "bytes": 461,
-      "sha256": "5ad4b967a133bf88f2c8760857babfa226267ae0e5adfdc07b5cec11c5b06769"
+      "bytes": 466,
+      "sha256": "c8231c20c351085bfa499c8f8f9bf72a27700fde563ae257d4ec109988034270"
     },
     {
       "path": "CONTRIBUTING.md",
-      "bytes": 411,
-      "sha256": "fd6812523cbb2b8e051624d715475c3bad387fc002b185ddb173a08a37aed566"
+      "bytes": 663,
+      "sha256": "75ef2c1ff2b1140116a3f9305b84b7e90f7806b7527734ea0cbc41b6e0e088b3"
     },
     {
       "path": "Dockerfile",
       "bytes": 439,
-      "sha256": "dc8175686f5f491d244f64b91a15e0985d439994719187369930e87e6f580154"
+      "sha256": "029dfc759c3ac58f9d3e53115555c81d01717693be37d267bc0e1eecc5b0023a"
     },
     {
       "path": "LICENSE",
@@ -50,18 +51,18 @@
     },
     {
       "path": "Makefile",
-      "bytes": 484,
-      "sha256": "52edd8ee9737cc0a8e5d638f4db8c4de4a929937e99805dd2d62ba4a304ac84b"
+      "bytes": 908,
+      "sha256": "fdfcfd5bc2da4c4c2b86a9740a6add8dd1e01cef65f2e87c036238c609f7621e"
     },
     {
       "path": "README.md",
-      "bytes": 12617,
-      "sha256": "f13f02f135b4fe075d10653b3167aadeb41bea4c961b1094d5b39c122638ccc7"
+      "bytes": 15961,
+      "sha256": "7793e20dd66f40231e304171873f12225bacc089cc3ae5eb3013a8f90377418f"
     },
     {
       "path": "RELEASE_NOTES.md",
-      "bytes": 716,
-      "sha256": "bf151f9461f725b5893183dc56e83afea64aaddc7a76258d52cea5d25a0bdd37"
+      "bytes": 1897,
+      "sha256": "ee7dced0b671296e44ca4932bbf30cade1461f12b9b6adf9cb07e4f70f2e51b5"
     },
     {
       "path": "SECURITY.md",
@@ -69,9 +70,14 @@
       "sha256": "f223906434d7a412c563e0267bf3aa5b00354115014724eaad9f8033ccdfd9ca"
     },
     {
+      "path": "SOURCE_MANIFEST_v1.0.0.json",
+      "bytes": 46616,
+      "sha256": "d4b75b0d51617277481d0aafe50f1dbc635f15f1c280c39dee41b2d43157203c"
+    },
+    {
       "path": "app/streamlit_app.py",
-      "bytes": 2587,
-      "sha256": "54b6d8bd9773b6dd0a2ff77e7acaf795cf5caff19dd021fd1aafc845ca86e316"
+      "bytes": 3004,
+      "sha256": "fac3cb0a32e9937a9ecc889ce2b8e25eb6de7b1d556e92ff3b53e4169d7569ad"
     },
     {
       "path": "configs/data_sources.yaml",
@@ -129,44 +135,9 @@
       "sha256": "7e06bc195b5611e774f98ab5251a127297eda6b435556e5a7ffe32a0ccf67f1e"
     },
     {
-      "path": "data/raw/depmap/.gitkeep",
-      "bytes": 0,
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-    },
-    {
-      "path": "data/raw/depmap/README.md",
-      "bytes": 266,
-      "sha256": "23d3ec63edfb6c60fd831894a135ca272c85942baac4e44490516c08c7208c8e"
-    },
-    {
-      "path": "data/raw/gdsc2/.gitkeep",
-      "bytes": 0,
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-    },
-    {
-      "path": "data/raw/gdsc2/README.md",
-      "bytes": 258,
-      "sha256": "4cdf609638feefbb0154d5eb78d2e19fa933528b42f366b13e4efa91092b77f6"
-    },
-    {
-      "path": "data/raw/prism/.gitkeep",
-      "bytes": 0,
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-    },
-    {
-      "path": "data/raw/prism/README.md",
-      "bytes": 229,
-      "sha256": "7e9526b15f918be6cdf376abcfebf0d6eadf632c96892ad8d6ce6d254adca6c1"
-    },
-    {
       "path": "data/raw/prism_manifest.json",
       "bytes": 819,
       "sha256": "21745642f8d8b94bc14a89aa308215029442460868407c9fc18a321b3c805fa4"
-    },
-    {
-      "path": "dist/drugmatch_confidence-1.0.0-py3-none-any.whl",
-      "bytes": 49835,
-      "sha256": "1aa4bb78c550c97d8e9fcac533251dc1e6afe9ec9d2e23770aaf62a91e714001"
     },
     {
       "path": "docs/ARCHITECTURE.md",
@@ -204,6 +175,16 @@
       "sha256": "dd8469a3c2674f4de4622464ff3ce4d91baa67cd8eb00fa42340f2587ec040a9"
     },
     {
+      "path": "docs/MAPK_EXPERIMENT_PLAN.md",
+      "bytes": 4068,
+      "sha256": "5dd7a78addf4f29e196add258490851381da42bd20e0ecd56ef28bc62163f11e"
+    },
+    {
+      "path": "docs/PIERRE_FABRE_REVIEW.md",
+      "bytes": 8717,
+      "sha256": "249a66dbc619ed32a29a99fc778ee03a3a47f39d344633f67e504af35108666b"
+    },
+    {
       "path": "docs/PROJECT_STATUS.md",
       "bytes": 908,
       "sha256": "4975c5e2ba9cdb6bc417e7293d55e6ae8f34cd025012330f8afe621c9e7efaac"
@@ -215,8 +196,13 @@
     },
     {
       "path": "docs/REAL_RESULTS.md",
-      "bytes": 3573,
-      "sha256": "6258a84be1ca5b5d1ed116d34bdba0ff01b98582fa6222229a8e7c4ba062c5fc"
+      "bytes": 3699,
+      "sha256": "0bf52dd05a7e568f2c786bc69d86710f43df2d68bc368a10de015860fdf392dc"
+    },
+    {
+      "path": "docs/REVIEW_RESPONSE.md",
+      "bytes": 4693,
+      "sha256": "f26f1d67ba37e21ba0e0051d1ddc22b19b2861718fef3781b42ac5a42e88ea44"
     },
     {
       "path": "examples/README.md",
@@ -509,14 +495,289 @@
       "sha256": "b43f8a8e5905020c500aa8471c6a1d4492633855dd07c786b45a109616363816"
     },
     {
+      "path": "models/review/depmap_26q1_prism/afatinib.joblib",
+      "bytes": 556387,
+      "sha256": "fcbcca9be87e5e4f623917cedbd87d40b7e3e0fdf666af05c40780cd1d23e3fe"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/afatinib_classification_tuning.csv",
+      "bytes": 1087,
+      "sha256": "d66e73d7deea9187b30698067b1ffb239daa5f2480638cd336489b74a43867e0"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/afatinib_feature_manifest.csv",
+      "bytes": 38297,
+      "sha256": "43b34149756530305d9a82f9f9c06b5a8a51349e5e41913506d67cb55c6760df"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/afatinib_internal_classification_predictions.csv",
+      "bytes": 1605,
+      "sha256": "2c3e24ff10b5a93695516a87ee1a81364d04df5e7546626c416aedde06aa7ffd"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/afatinib_internal_regression_predictions.csv",
+      "bytes": 4915,
+      "sha256": "bbe1261bfb247f088563c867a5852a16ae99adfee70ff83253460f89446c542b"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/afatinib_metrics.json",
+      "bytes": 2219,
+      "sha256": "e0411ef389df66a81cc91a00356211582b35e1dd81ac0152e1d6b7a05284f1ff"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/afatinib_partition_roles.json",
+      "bytes": 6698,
+      "sha256": "fd19f041c0eee1dcbed9d128ea188a2446d302268252298d9cd5c8925b7ba1f9"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/afatinib_regression_tuning.csv",
+      "bytes": 750,
+      "sha256": "6d034d8b1f896843bf19912b8e6eea920a5e0eff7d38a549f7707374c57b96f9"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/afatinib_shap.csv",
+      "bytes": 22854,
+      "sha256": "57a55602fa0724644471e51953efe120dfe3bf74be50aa7f5b1a5a43e29629ba"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/afatinib_split.json",
+      "bytes": 6693,
+      "sha256": "1fcdfe83bc7ea76f4db52fa2e5a29d58031ac82687e98daba38d4cb5e1ba9daf"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/afatinib_validation_predictions.csv",
+      "bytes": 1306,
+      "sha256": "198d6c677d38e5e87c5b76a882106f7c1ad4c33f826591fc4319df8087ad0626"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/gemcitabine.joblib",
+      "bytes": 460868,
+      "sha256": "16918da51d8e549dc5935acaee282f1406f60684e1b7b737db72a20288d98678"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/gemcitabine_classification_tuning.csv",
+      "bytes": 1036,
+      "sha256": "7804df42414d1045f2fc95c1781524c9c032289491d2a8ee8f81c878da33728b"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/gemcitabine_feature_manifest.csv",
+      "bytes": 37918,
+      "sha256": "4dcafa4e755f68ac183ad56fa5cf879927a02c3ae9ecfbc24d6a1f4a02e0053d"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/gemcitabine_internal_classification_predictions.csv",
+      "bytes": 1264,
+      "sha256": "79a42a89ecc1d1484c6efaa2cc19aea09af510629dbdb0b2cdb361352cbc4530"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/gemcitabine_internal_regression_predictions.csv",
+      "bytes": 4082,
+      "sha256": "596347e577bdf3e54b9dbe7c0b42c35fffaae7e2893c6fdad5a8debb12212fff"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/gemcitabine_metrics.json",
+      "bytes": 2330,
+      "sha256": "7946977ba440f4118df5b7399f925afffd78af15113af2801f7dc676f4ea5c20"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/gemcitabine_partition_roles.json",
+      "bytes": 5438,
+      "sha256": "7ee6b4d4d3e5cee5faa18d2e04a323a12d3e96fb715e5788bfda3b8d67c6cf84"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/gemcitabine_regression_tuning.csv",
+      "bytes": 767,
+      "sha256": "37b00b53b5f52997b8713b883e9f75cced9563f29892a237fa67254e0f37b140"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/gemcitabine_shap.csv",
+      "bytes": 22749,
+      "sha256": "9798b7ccbb6a9a6e1cae8c2b7dca4a94766b8a7bd1f5c6b697a365092e630815"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/gemcitabine_split.json",
+      "bytes": 5433,
+      "sha256": "56f1b74fc9c5e1ba0ce99bbc8d6de5238e3419d00cc205aa671f60aaf15a6b62"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/gemcitabine_validation_predictions.csv",
+      "bytes": 1089,
+      "sha256": "57ac838b047cda042bed7abefa9b29ea242aa4aa659159242f3e4862b7ba7247"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/olaparib.joblib",
+      "bytes": 543142,
+      "sha256": "0fa56900beaaffb613affd6ac4791ab63723310ebb1ca54db5b94a95f0776f33"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/olaparib_classification_tuning.csv",
+      "bytes": 1086,
+      "sha256": "419869b8ef3bed074bbaef4131a3ce1617bcea363ba1831827f429ab01ea5959"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/olaparib_feature_manifest.csv",
+      "bytes": 38307,
+      "sha256": "babe0043820042c455bbced779ed8e4dad24652a4a3bcaac01a264e5202c920f"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/olaparib_internal_classification_predictions.csv",
+      "bytes": 1656,
+      "sha256": "f63e082b70d22fbdac0e98bfceb45387a22ee5b5fd94f867254b169ccb9a6f01"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/olaparib_internal_regression_predictions.csv",
+      "bytes": 4998,
+      "sha256": "6b3d3f903aeecdec02f3f877b34a37e39779e2c95c1606625b47b775b3aba067"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/olaparib_metrics.json",
+      "bytes": 2288,
+      "sha256": "c0cd16b83871d24924dacc23f8c310908e8269949ae45fa1ebe9ae9054097cad"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/olaparib_partition_roles.json",
+      "bytes": 6806,
+      "sha256": "d9b9a776e4dc96e3cedc7669f73f4fc3d5d87a7777dd5442ff16d893cfa49cbf"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/olaparib_regression_tuning.csv",
+      "bytes": 750,
+      "sha256": "5cf55802c54e6568bbe0d1aeaea723da7c2009cd6faced3a00677561b64cbb75"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/olaparib_shap.csv",
+      "bytes": 22839,
+      "sha256": "71ae12bba82ac3c737f9c8f3eeeb5a84fae450968742339599db13df1dfe1935"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/olaparib_split.json",
+      "bytes": 6801,
+      "sha256": "c6b0cd7bb2772e325008c2f26bb90f07c91d903d9bb55ce69fd04d76c50014fe"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/olaparib_validation_predictions.csv",
+      "bytes": 1294,
+      "sha256": "c510d18aa56ba11251b2d1f3ba3367bef897812f23215454e46c47ca360f00fb"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/palbociclib.joblib",
+      "bytes": 526513,
+      "sha256": "c2a19d737b4de7af0ab0ce3281e5ad86e9dd367ca1d46ae53fbff72b802a672c"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/palbociclib_classification_tuning.csv",
+      "bytes": 1062,
+      "sha256": "b55796d86f9cc539c3d9c5449308b48b538918c4538f1544ed120b30b22aac53"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/palbociclib_feature_manifest.csv",
+      "bytes": 37842,
+      "sha256": "8a2abe53ab8e83fbdeff71fa7dc1e57a7da5f2ff334d93d018500965c192578d"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/palbociclib_internal_classification_predictions.csv",
+      "bytes": 1878,
+      "sha256": "110866277c23ea5939eb9f8e71fce4339ca7595912eef13762d4a29df6da8d76"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/palbociclib_internal_regression_predictions.csv",
+      "bytes": 4908,
+      "sha256": "48df28eb669c7483097847abf1fa485658c228736a140d37afa57608a94f42ca"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/palbociclib_metrics.json",
+      "bytes": 2253,
+      "sha256": "b9a816fdb78d88c5883cf4aa16f2ac645fc94d01dc3ac25c39ead515220162a4"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/palbociclib_partition_roles.json",
+      "bytes": 6734,
+      "sha256": "319dc81b93580b674e56087c0463285d5dc7570cd830cd78ce5f534b4eef707a"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/palbociclib_regression_tuning.csv",
+      "bytes": 758,
+      "sha256": "54465b92d8422de764882f454c7c0ea631886a6d06974e32b7786e4911e5745c"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/palbociclib_shap.csv",
+      "bytes": 23104,
+      "sha256": "31c03d7ea10ceffce108f0a95d9b4e8803dc8f8ad7a0d298be7314d4daafa3d4"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/palbociclib_split.json",
+      "bytes": 6729,
+      "sha256": "b0e302370b21aaeb983e36e7351e88d761809686d125e154073f28dd42aeeafd"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/palbociclib_validation_predictions.csv",
+      "bytes": 1255,
+      "sha256": "59f831b257676f56bfbefe8e6b723ccf786be764f95469536ab6af2954576b5e"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/trametinib.joblib",
+      "bytes": 526325,
+      "sha256": "d1b198f0e39af86d7f12748a91820a5f98b312fc639c6b6e35f02e7c037b7e45"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/trametinib_classification_tuning.csv",
+      "bytes": 1086,
+      "sha256": "cfd75f4c8a20e589f2cee234e115a86d011b3df9115bd445d893fcea2e6770f8"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/trametinib_feature_manifest.csv",
+      "bytes": 37864,
+      "sha256": "71adbd4bdbf549f03a57dde73492b6d4e2e3728fb8d46593d32c569c01d5cccc"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/trametinib_internal_classification_predictions.csv",
+      "bytes": 1646,
+      "sha256": "543c800e9f6726e7e77889525f4ed68ec837f4baefbd117da338f501eda37cbc"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/trametinib_internal_regression_predictions.csv",
+      "bytes": 5052,
+      "sha256": "bf1e9484a86ec25bd19ea8a59c43d96f0d5ff435fa607e8b8fca8fb352447307"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/trametinib_metrics.json",
+      "bytes": 2303,
+      "sha256": "e3fd84f52503b0d5894bf211b766a8f718aa5d308da96f39b67a3fb2b791fbc2"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/trametinib_partition_roles.json",
+      "bytes": 6824,
+      "sha256": "a9190de6171ea05ea12e3015fc2397e45f013c5cbfb82d75babb10b161c1dc70"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/trametinib_regression_tuning.csv",
+      "bytes": 748,
+      "sha256": "b754db282cf9863c77c63c89135da9d0eab51e80476c96dc969e787a0bafb283"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/trametinib_shap.csv",
+      "bytes": 22785,
+      "sha256": "2fa5689988f4ae93a3bf491243b0d2947ce76a60f3f554c0aa4aa939aa80418e"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/trametinib_split.json",
+      "bytes": 6819,
+      "sha256": "4367be9ac5e8ce43e3f71c80c1676fb67686c9fe7386b5526bad6f01b21626f9"
+    },
+    {
+      "path": "models/review/depmap_26q1_prism/trametinib_validation_predictions.csv",
+      "bytes": 1268,
+      "sha256": "37d5ddb3df30613b4f88d024dd7d873e2572b8544693dde09596df67d9681fd4"
+    },
+    {
       "path": "notebooks/README.md",
       "bytes": 232,
       "sha256": "8be6f7bf3db43fbe3c7d5c7b326cfcbe5cebc6cd3c9dd01912f9722f1b4188de"
     },
     {
       "path": "pyproject.toml",
-      "bytes": 1111,
-      "sha256": "0870d397c4ceb68658579190160b4a30d51c75f6bfa7ea9f84134e2f199a83dc"
+      "bytes": 1220,
+      "sha256": "d52df4a672cffb628d0f70bf3aef79eb55a2119861b4c9985545203ae9f8da8e"
     },
     {
       "path": "reports/PROJECT_COMPLETION_REPORT.md",
@@ -525,8 +786,13 @@
     },
     {
       "path": "reports/TEST_REPORT.md",
-      "bytes": 2092,
-      "sha256": "5a624ca08679ad8f693ad4a5364e264d19a82c3c97f7aa905a503395c5e6f3ae"
+      "bytes": 4582,
+      "sha256": "f0c5e1ab3bd3333ce1b2023cdf3d93dfd07c11195163371aca8487bb9834fab7"
+    },
+    {
+      "path": "reports/ci_environment.txt",
+      "bytes": 1044,
+      "sha256": "ec5416b2045e0c37569f5b28dff5a9b802d2dc98d38c0eb7734f5022300dde54"
     },
     {
       "path": "reports/cross_validation/afatinib_oof_classification_predictions.csv",
@@ -949,6 +1215,31 @@
       "sha256": "64c8e7d2c66849caf1f8240dd847eadf7c8647152724731f1d32e326fda6472f"
     },
     {
+      "path": "reports/figures/review_interval_feasibility.png",
+      "bytes": 143464,
+      "sha256": "58830a258485688aeb39afe4bf7ffe1751c374601a0406f36f2e38de9d900dfc"
+    },
+    {
+      "path": "reports/figures/review_matched_auroc.png",
+      "bytes": 77252,
+      "sha256": "55a22aa803f2520e1010c5ac4d392ed69ead0e98e72fbf7a2d7c7e2b25678db1"
+    },
+    {
+      "path": "reports/figures/review_matched_roc.png",
+      "bytes": 333424,
+      "sha256": "2113d451b353ab9b584d9c1d197254d44ef139728ad6c47e4fbd26741260fd72"
+    },
+    {
+      "path": "reports/figures/review_paired_auroc_difference.png",
+      "bytes": 83027,
+      "sha256": "616472189b0718510df5afe543bef9278a9eeaa39b71a59703574b9151bdea1e"
+    },
+    {
+      "path": "reports/figures/review_screening_budget.png",
+      "bytes": 232014,
+      "sha256": "a95c889e0ac0e51b8ad5066a4e819edc465da61593a185e7c28b5de2a92238ac"
+    },
+    {
       "path": "reports/figures/trametinib_all_mapped_external_scatter.png",
       "bytes": 129640,
       "sha256": "a70a3cb15337f8605a89cbcb59f8c955e724845f2b8cbffc65602baf6e235d9b"
@@ -984,9 +1275,174 @@
       "sha256": "ebafbe26210b93d81e81ffa050236db0ed546805548ffe9f2e38c4bdc4058428"
     },
     {
+      "path": "reports/pierre_fabre_review/afatinib_external_reanalysis.csv",
+      "bytes": 3398,
+      "sha256": "fbeba5482a23f6c0bed9ec39d1b7e4dbc0412988fd0756dbf33476c43a4d2b29"
+    },
+    {
+      "path": "reports/pierre_fabre_review/afatinib_fold_roles.csv",
+      "bytes": 50592,
+      "sha256": "dfbe3b25479bd937789483ec28331781c87010ab520f9ab1deeb4a5be5fc676f"
+    },
+    {
+      "path": "reports/pierre_fabre_review/afatinib_matched_oof.csv",
+      "bytes": 214497,
+      "sha256": "360f17ad0128c627d2886c284f877c863758cce65f2e03c4715da09bc1d54e95"
+    },
+    {
+      "path": "reports/pierre_fabre_review/afatinib_summary.csv",
+      "bytes": 1396,
+      "sha256": "e5c7c6f909aeb5da47d4041ed5fc58b708418c1ff5295f3e4ed66063ede94aea"
+    },
+    {
+      "path": "reports/pierre_fabre_review/analysis_protocol.json",
+      "bytes": 1387,
+      "sha256": "bc452bd6bb609c5b852738b87043cf245c43b0e9a4fc2565927412112df00e6a"
+    },
+    {
+      "path": "reports/pierre_fabre_review/external_reanalysis_protocol.json",
+      "bytes": 299,
+      "sha256": "4b96d720ab0f3c1b2dee3f5ce56e847971c84702dc6ceaa219a7475f8f0cdfd5"
+    },
+    {
+      "path": "reports/pierre_fabre_review/external_reanalysis_summary.csv",
+      "bytes": 1246,
+      "sha256": "ed59f408b3f2cd606a2cf0dfe6cd9bfd94cd99e7a47faa029a0269e9fd638e8f"
+    },
+    {
+      "path": "reports/pierre_fabre_review/gemcitabine_external_reanalysis.csv",
+      "bytes": 2642,
+      "sha256": "8d8b755ce2a084405c3eced04280b86f7f6134e08e4d3830b966b210dbc3df30"
+    },
+    {
+      "path": "reports/pierre_fabre_review/gemcitabine_fold_roles.csv",
+      "bytes": 45452,
+      "sha256": "eebf9d46d43f58039e90a4d9fe8a13d28f262ddcaf3c2aee28c7bf315ac5ed69"
+    },
+    {
+      "path": "reports/pierre_fabre_review/gemcitabine_matched_oof.csv",
+      "bytes": 179228,
+      "sha256": "98a93268f323922816aee323452403131d865d8778adc183bd555186cb8bfbcb"
+    },
+    {
+      "path": "reports/pierre_fabre_review/gemcitabine_summary.csv",
+      "bytes": 1432,
+      "sha256": "03161baac870c0b261ba74ab05530317184703b466634ab2cba1bf41a1934c94"
+    },
+    {
+      "path": "reports/pierre_fabre_review/input_manifest.json",
+      "bytes": 1610,
+      "sha256": "153f399089da752e3997cdc19641a4f2162a8dde81081d443b9c13867ce49734"
+    },
+    {
+      "path": "reports/pierre_fabre_review/interval_feasibility.csv",
+      "bytes": 17520,
+      "sha256": "9bce9261532c775b038d03dc1bcc23aeed6cfcee4a45202a9402cff31b866ae6"
+    },
+    {
+      "path": "reports/pierre_fabre_review/interval_radius_sensitivity.csv",
+      "bytes": 36951,
+      "sha256": "af60fe6b4af7a4e8ae5a767caa4093599facbeccee7139c00ca33a8d45d0a309"
+    },
+    {
+      "path": "reports/pierre_fabre_review/mapk_top10_elastic_net.csv",
+      "bytes": 1730,
+      "sha256": "a3ef7ab6f5b427378beb1dd1c8a78abbcb4be78f438f260c49d9dd34a0cd2e51"
+    },
+    {
+      "path": "reports/pierre_fabre_review/mapk_top10_lineage.csv",
+      "bytes": 1690,
+      "sha256": "0280f612a3b8796d338159a8383548824d2d82e6817f7d738eb147df6dbc6d23"
+    },
+    {
+      "path": "reports/pierre_fabre_review/mapk_top10_xgboost.csv",
+      "bytes": 1703,
+      "sha256": "9966b9a96df4d7d817ca289e6573b27880272e41d3db87a3e6a0714a549b229c"
+    },
+    {
+      "path": "reports/pierre_fabre_review/matched_summary.csv",
+      "bytes": 5362,
+      "sha256": "0b26bbd500207384f93235e7dfd44fe95603522fad6f37b3f3f05e7d1e56bf8d"
+    },
+    {
+      "path": "reports/pierre_fabre_review/olaparib_external_reanalysis.csv",
+      "bytes": 3589,
+      "sha256": "3bbc03287f5af43a46fc75fa8827f96a96a31564b2a267fd00616feb42613dce"
+    },
+    {
+      "path": "reports/pierre_fabre_review/olaparib_fold_roles.csv",
+      "bytes": 51418,
+      "sha256": "ef79c734197296cf70b4a8c7a45262c9bea9d39063f6157ae9a03a334a9ad5d2"
+    },
+    {
+      "path": "reports/pierre_fabre_review/olaparib_matched_oof.csv",
+      "bytes": 218639,
+      "sha256": "d1fbed10cc004651d9aa8e9b2cbbee3e739b8795b5af1b687182b9cb1be922f0"
+    },
+    {
+      "path": "reports/pierre_fabre_review/olaparib_summary.csv",
+      "bytes": 1430,
+      "sha256": "4cd672fa06276c1120e1c30d7483a259bdd98d8beb378c53a0af59a159b42517"
+    },
+    {
+      "path": "reports/pierre_fabre_review/paired_auroc_differences.csv",
+      "bytes": 926,
+      "sha256": "56dfac8d5cb61773de18822f9ca627d5452ec0e5722f02f6f4a44e5ffe898449"
+    },
+    {
+      "path": "reports/pierre_fabre_review/palbociclib_external_reanalysis.csv",
+      "bytes": 3226,
+      "sha256": "43116f2778b4a4ee1614f29547dfec4ec03ed0adeac927cb5d41692b8cef10d8"
+    },
+    {
+      "path": "reports/pierre_fabre_review/palbociclib_fold_roles.csv",
+      "bytes": 56444,
+      "sha256": "279c01914cc2e751b58c449f4b6ce38ef400d48973b7f04908318729851d6f7f"
+    },
+    {
+      "path": "reports/pierre_fabre_review/palbociclib_matched_oof.csv",
+      "bytes": 206167,
+      "sha256": "41c4e7fac9f9f6905831bd3be9ef095318518a14edb64a99e15d68ec84f1667c"
+    },
+    {
+      "path": "reports/pierre_fabre_review/palbociclib_summary.csv",
+      "bytes": 1443,
+      "sha256": "aa77cbc1dfd7746beae6224bda14e155b0210522a5801315fbe8b0a81937828d"
+    },
+    {
+      "path": "reports/pierre_fabre_review/risk_coverage_diagnostic.csv",
+      "bytes": 8765,
+      "sha256": "fc5e177ada3e1e1d9d9ded9462be3835634001602881a7397eb10bf35feec2dd"
+    },
+    {
+      "path": "reports/pierre_fabre_review/screening_budget_summary.csv",
+      "bytes": 7598,
+      "sha256": "16dd4313e5cb6edae00d0bc1216b2b1e972eeb3bbae63f7f159df677036f997b"
+    },
+    {
+      "path": "reports/pierre_fabre_review/trametinib_external_reanalysis.csv",
+      "bytes": 3091,
+      "sha256": "ff2db1aab9fabe8ff480bc0f3ff43cc3f5416f46f852215f4372335580754c32"
+    },
+    {
+      "path": "reports/pierre_fabre_review/trametinib_fold_roles.csv",
+      "bytes": 55299,
+      "sha256": "2c2171cde4fac9eea4cf1a45878a782eeb360d8677dd285808a749d4cc2ba07a"
+    },
+    {
+      "path": "reports/pierre_fabre_review/trametinib_matched_oof.csv",
+      "bytes": 222007,
+      "sha256": "c1f2b3a9c25c016d81aa4e9ef180eda9fe2e8a3f4f6f03535166db4db727ce5c"
+    },
+    {
+      "path": "reports/pierre_fabre_review/trametinib_summary.csv",
+      "bytes": 1417,
+      "sha256": "3373ddbc37095cfd4d9386dcea4b6aa436af0e7f4f852dad715d0c94a8773e15"
+    },
+    {
       "path": "reports/release_check.json",
-      "bytes": 2896,
-      "sha256": "b86174a95e5c1d88dc033185ee9c8438af5bd446bcc39e2e3cd01cad6b7e1f82"
+      "bytes": 2297,
+      "sha256": "86fa9f10e653998c7580c223f40d056ede1d7c65610c7b0346712f98d44b026d"
     },
     {
       "path": "reports/robustness/afatinib_feature_stability.csv",
@@ -1064,29 +1520,49 @@
       "sha256": "f385fea8c1d249929df6b5c43dbce548a4c9caa10de873dc08218144e14de89d"
     },
     {
+      "path": "scripts/analyze_screening_budget.py",
+      "bytes": 8580,
+      "sha256": "a51b0329b23df81c071aef84f8371bdffd0b10b888880dc58d1bb9c4d645de2a"
+    },
+    {
       "path": "scripts/check_release.py",
-      "bytes": 2038,
-      "sha256": "dce78b9f523aec312d318628e523df2a2cdd87bccb78e4d4d6714e3faac153f0"
+      "bytes": 2049,
+      "sha256": "0c64f1f4951ee2d70434074dcfe897813f818241726960bbf27e331c11c0962e"
     },
     {
       "path": "scripts/generate_demo_reports.py",
-      "bytes": 5020,
-      "sha256": "a501f4cc611f1cf42caa93a228ffe528730e3cff2c25258d1195d76a8b49c62a"
+      "bytes": 5019,
+      "sha256": "78d4772de1143279660afd137287de37d5f91ad25058e55ba4364b661d4426ce"
+    },
+    {
+      "path": "scripts/generate_review_figures.py",
+      "bytes": 6449,
+      "sha256": "c32d929bd0aeff8b885c91f0cd11017cba2e5af89919189ab1e307bb086405a8"
     },
     {
       "path": "scripts/generate_robustness_reports.py",
-      "bytes": 3192,
-      "sha256": "f3ca4774367351f7bea16bd0fa9840385a5f0d5773feb856fdab09384fb7d38a"
+      "bytes": 3191,
+      "sha256": "179faa6026dab2126176ec7955ef415630ed33ab311672c34a9e8788aa4ead0d"
+    },
+    {
+      "path": "scripts/review_external_transfer.py",
+      "bytes": 2033,
+      "sha256": "f1328f5ae0a84e35fc6f2c0e4f7dc72133f82e7ff4e156350b79c3d3dd9804ba"
+    },
+    {
+      "path": "scripts/run_pierre_fabre_review.py",
+      "bytes": 4769,
+      "sha256": "4c269738b2f2ba8f441b90d68a8d9272c251335f0bc42b2e34cc48543ba769ab"
     },
     {
       "path": "scripts/train_all_demo.py",
-      "bytes": 391,
-      "sha256": "090a133be47353330de5c1dfb622073321338e6f3806356bcac81323c4f048e2"
+      "bytes": 390,
+      "sha256": "546666c4dcc54fa9cbb85184c64aff4cdf66874f5de9e6c6dfc498b2c9208f75"
     },
     {
       "path": "src/drugmatch/__init__.py",
-      "bytes": 183,
-      "sha256": "3236da50c2cff2d2702cb8b4c023cd5ea164cee28c3a4d0266227b5ec3d7bcb5"
+      "bytes": 188,
+      "sha256": "89bb0feeef07a1cf990b19d77159c90c194c1b75ce9921cccb8a7a16ee933327"
     },
     {
       "path": "src/drugmatch/__main__.py",
@@ -1095,28 +1571,28 @@
     },
     {
       "path": "src/drugmatch/api.py",
-      "bytes": 6181,
-      "sha256": "8428509932f14b6d583f75316831628e231875daf0bf34e8a2c6207914354124"
+      "bytes": 6546,
+      "sha256": "90906bd130e34859ea787343f9618ed08c3fd16bfdb6b7905e01b3c04854b28e"
     },
     {
       "path": "src/drugmatch/audit.py",
-      "bytes": 4495,
-      "sha256": "c7bcef79633ecb366e1d00b7e95d2a9dab94681f431756efea79323368693226"
+      "bytes": 4463,
+      "sha256": "7b9726a8f809882eb75411c76c17102bce4e050b05c23a197509a49632f5911c"
     },
     {
       "path": "src/drugmatch/baselines.py",
-      "bytes": 2737,
-      "sha256": "a498e4b2f2b0c735b5f76b82f657a69e7fe5e3bc45118c547b5c5d1638cfb4ee"
+      "bytes": 2721,
+      "sha256": "211698bf72f4b7ec97c4d699b38da18a08f2f1ebdd57dea4a1af2782356af093"
     },
     {
       "path": "src/drugmatch/calibration.py",
-      "bytes": 1552,
-      "sha256": "625e9314fb51199e1540cda109ef08d11cb6ad3d4de26679c08ccddd7d598654"
+      "bytes": 1580,
+      "sha256": "5c0145872afad6496ed842b993272d40083b6bf7a12fc854e3c7c7fd722d6486"
     },
     {
       "path": "src/drugmatch/cli.py",
-      "bytes": 19401,
-      "sha256": "298e422ed1d0822376fd58a058d521508bc49e0b4ba28f49891b95439019d9c0"
+      "bytes": 19739,
+      "sha256": "fb924c08be707c5a32ae9ffe3b03a8efd1c89354c3bb6e8cb0756f71f25f6178"
     },
     {
       "path": "src/drugmatch/config.py",
@@ -1130,33 +1606,43 @@
     },
     {
       "path": "src/drugmatch/cross_validation.py",
-      "bytes": 5853,
-      "sha256": "8c7985543242b8243671b66e0c2fb5a9760eecb7c2ca33ac636dfd0d0c4e6c37"
+      "bytes": 6330,
+      "sha256": "d58ed0061165eb4444bf0c47400fe6e7d659acc74a5e95f988b6ff74910e8f5e"
     },
     {
       "path": "src/drugmatch/data.py",
-      "bytes": 8820,
-      "sha256": "3e84c926b54b918fb3dd0cf29368c1e615a046c26bee263054cb8ab7ba51d02d"
+      "bytes": 8916,
+      "sha256": "36dbc1ac93fff46d1901296c3f6bef8fbcd6a63eee01d6c9ca9d3b360cb3f0a0"
+    },
+    {
+      "path": "src/drugmatch/decision.py",
+      "bytes": 2403,
+      "sha256": "e47b6435b8e8fbe12ea2d6b871e0947027bf9ff6ef23336d73377cc05de05e9f"
     },
     {
       "path": "src/drugmatch/evaluation.py",
-      "bytes": 2373,
-      "sha256": "e59898e3aecd705785d06236966629e552d784c5986fe8f3e3f288a9524f797f"
+      "bytes": 2405,
+      "sha256": "fb2cb475b4b017bb131800be29802520ed86558a664793b81b42b93e1b842f9b"
     },
     {
       "path": "src/drugmatch/explain.py",
-      "bytes": 1801,
-      "sha256": "13fd2541db64b9420c06e8edc66eaa4b7a37ded14e55a35cab1e3a3e19812b33"
+      "bytes": 1847,
+      "sha256": "68570faceca5b3842402536d695b46c8f9d1dda50f074c67302c9fadf7f0c838"
     },
     {
       "path": "src/drugmatch/external.py",
-      "bytes": 6505,
-      "sha256": "39b17d8af3f89e7ffb4dfa6d35f272bd3070a5148f80b17bf26476e4e8740d2a"
+      "bytes": 6581,
+      "sha256": "43ab03081bae94f4f4d593dffb354a4c89efd437db025d775ff408ccb3a92e28"
     },
     {
       "path": "src/drugmatch/labels.py",
       "bytes": 1192,
       "sha256": "c980f93246de600f236152711e43d4dfd7ceaf6c4273fbd7d04a771eeaba77d7"
+    },
+    {
+      "path": "src/drugmatch/matched_validation.py",
+      "bytes": 7894,
+      "sha256": "b12dd6f65f0fa1f8dedeffdc247a1e0208c53fc7d7444b916c5c16f46bad9252"
     },
     {
       "path": "src/drugmatch/models.py",
@@ -1165,43 +1651,48 @@
     },
     {
       "path": "src/drugmatch/ood.py",
-      "bytes": 2048,
-      "sha256": "788d3fd1356e522e0ea0d50ab1515b1505740aa6a4e88d358d593233e184bfd7"
+      "bytes": 2098,
+      "sha256": "80494d3a3f12d5fc92c6229ba01c693b80a545ad76c308cfbc8f5b47883909a4"
+    },
+    {
+      "path": "src/drugmatch/policy_audit.py",
+      "bytes": 5781,
+      "sha256": "afd90fe02f96362e4d7c8072bcb456d15e665db8e7cd2e82c20e9ea25183df40"
     },
     {
       "path": "src/drugmatch/preprocessing.py",
-      "bytes": 9234,
-      "sha256": "75bfdd81f801ea4e13c332200ace43a0ddff719b712c8f2178ff778cae30258b"
+      "bytes": 9655,
+      "sha256": "4409a507d2589432155f54ea58f91d3e2a482aec793eb647520b47b74893f050"
     },
     {
       "path": "src/drugmatch/reporting.py",
-      "bytes": 15525,
-      "sha256": "8f6b55a4f6d219ebdc3524028572bf2320f479555b23268ab2e9876ed1a19350"
+      "bytes": 15833,
+      "sha256": "04ae2d5e9d9fbeb4265872db3db718d4077d8aa5eb6b67985282e1e26d65ebc5"
     },
     {
       "path": "src/drugmatch/robustness.py",
-      "bytes": 8639,
-      "sha256": "391a000c3470f832ca76725ff15c4bcb98f7c916e3c644f2588cb2030ebc8211"
+      "bytes": 9613,
+      "sha256": "6b8e53592d958d49a854f5aa8982f80b7438a7680060ec7be789d62955a1ada0"
     },
     {
       "path": "src/drugmatch/splitting.py",
-      "bytes": 2395,
-      "sha256": "30ce281de0ffc04a0a2e1ba1283d4c878975fbb0502e55166a68b09740f93fdc"
+      "bytes": 3100,
+      "sha256": "45a8d0586ac5f627c93131946618185c77e286ac6f7180eaa2e645d61d486512"
     },
     {
       "path": "src/drugmatch/synthetic.py",
-      "bytes": 4147,
-      "sha256": "8a3fd45f54e149fd7359eb14fa75f73190d5401975edd182a2d0770757c853d1"
+      "bytes": 4222,
+      "sha256": "85784e4f354af1e3af2585d55de7a7d2489b75d26d3ef87cd76cec3b381b13dd"
     },
     {
       "path": "src/drugmatch/training.py",
-      "bytes": 16123,
-      "sha256": "c392f8b985f3d9c313fa311fe0e5d79350f99c7f484513ed73d0b86a84421979"
+      "bytes": 16652,
+      "sha256": "ce003791db7576381267a307511634ea41b2caabca10e4e425f01ef8add833f6"
     },
     {
       "path": "src/drugmatch/uncertainty.py",
-      "bytes": 1478,
-      "sha256": "f819e5bb3d0420fa722072caebe375cb1e64ca8a17ac7d2e537a83b354694364"
+      "bytes": 2066,
+      "sha256": "d6bd18f2afa36ab71440ceceab01c4417e9f2cf3e1f57db7d53171f098eabb1b"
     },
     {
       "path": "src/drugmatch/utils.py",
@@ -1210,8 +1701,8 @@
     },
     {
       "path": "src/drugmatch/workflows.py",
-      "bytes": 4206,
-      "sha256": "e9637b394b7826f141ea97e2b96afe2f34c730e7a8e26f043bc5abe58939094a"
+      "bytes": 4262,
+      "sha256": "2a989aced6eaa0bb4ac68fef5ff899399ec63e48d02cd60b465ee0504fb66f30"
     },
     {
       "path": "tests/integration/test_cli.py",
@@ -1220,8 +1711,13 @@
     },
     {
       "path": "tests/integration/test_end_to_end.py",
-      "bytes": 1520,
-      "sha256": "eb56fdbe8ac81a915cdbfe11eaafeef971add74eac538713fbea5be3e323df26"
+      "bytes": 2471,
+      "sha256": "ed99e6b8218bd7be86ef03bcc822d8db55f2792485767d2c9083d2c064db7e6c"
+    },
+    {
+      "path": "tests/integration/test_matched_validation.py",
+      "bytes": 2542,
+      "sha256": "940acbd6bb921b2485f7340131b0634d7952c8749d2779f10288ae4b627d69da"
     },
     {
       "path": "tests/integration/test_reporting.py",
@@ -1245,8 +1741,8 @@
     },
     {
       "path": "tests/unit/test_config.py",
-      "bytes": 202,
-      "sha256": "6f8bd4cb95be0eb93f92851300bc51c1d81672590c6c1db5bff38b31fcc25190"
+      "bytes": 188,
+      "sha256": "a2a31326b3b3a5be63405b0bc96fa8f21a94a031e7e86985e9a596c517d471ee"
     },
     {
       "path": "tests/unit/test_contracts.py",
@@ -1259,14 +1755,19 @@
       "sha256": "8d300cb7224a5c7fc0282b7ddd9799f96097086d72704d6cff349888ed32e52d"
     },
     {
+      "path": "tests/unit/test_decision.py",
+      "bytes": 1983,
+      "sha256": "556e46272dbd59602fa0b0f312506fde6b724271b61fe561bc2e75047192e838"
+    },
+    {
       "path": "tests/unit/test_external.py",
       "bytes": 1287,
       "sha256": "ea2bcb2ff22db92a211d2bb997c968ccbafbab7f88ea703e4a06fefc4f919953"
     },
     {
       "path": "tests/unit/test_labels.py",
-      "bytes": 435,
-      "sha256": "cdf88998008cf95dfd0ce0e41c52fd8459bab0c03f375cfa6a78944accf0f66c"
+      "bytes": 421,
+      "sha256": "2dc952c286cbd1e3f93bd0fa929fef59bb4dfd791cbac9478bfa200e73f5db5e"
     },
     {
       "path": "tests/unit/test_ood.py",
@@ -1274,9 +1775,14 @@
       "sha256": "3d43d2810f9b6910a4915311d8f3ff427130fea24efe873bb37ecb117fe2c979"
     },
     {
+      "path": "tests/unit/test_policy_audit.py",
+      "bytes": 1978,
+      "sha256": "25c6bd11f3cd58277ce94904c5be11988f757c096440ebcfb7750ed7d781b8ab"
+    },
+    {
       "path": "tests/unit/test_robustness.py",
-      "bytes": 1706,
-      "sha256": "4b93c2de4358c06c6f95fe989f54f7d4eb671b0655cc148ad0fe146180c56837"
+      "bytes": 1734,
+      "sha256": "f95714b07b58e3b6ee91f764a891259e1ee4f7620cbc8562814adc5e53835892"
     },
     {
       "path": "tests/unit/test_splitting.py",
@@ -1295,8 +1801,8 @@
     },
     {
       "path": "tests/unit/test_workflows.py",
-      "bytes": 1725,
-      "sha256": "4fcb4899e394fcca578503e485e12c38d8c4e9ccabc15e5142497e56f38ae81c"
+      "bytes": 1697,
+      "sha256": "a7b5348d5cf38d828479fe7ab47df93d934a826bc3c319891b5fe6d926cdbdcf"
     }
   ]
 }

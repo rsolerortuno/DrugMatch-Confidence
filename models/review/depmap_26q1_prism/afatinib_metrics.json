@@ -1,0 +1,81 @@
+{
+  "baselines": {
+    "elastic_net_classification": {
+      "accuracy": 0.9285714285714286,
+      "auprc": 0.9910714285714285,
+      "auroc": 0.989795918367347,
+      "balanced_accuracy": 0.9285714285714286,
+      "brier": 0.05615211054559332,
+      "f1": 0.9333333333333333,
+      "mcc": 0.8660254037844387,
+      "precision": 0.875,
+      "recall": 1.0
+    },
+    "elastic_net_regression": {
+      "mae": 0.09820805319952772,
+      "pearson": 0.5403491160372177,
+      "r2": 0.2836949507816612,
+      "rmse": 0.13858905565784477,
+      "spearman": 0.6110047846889953
+    },
+    "lineage_classification": {
+      "accuracy": 0.8214285714285714,
+      "auprc": 0.8131969454448446,
+      "auroc": 0.895408163265306,
+      "balanced_accuracy": 0.8214285714285714,
+      "brier": 0.15700459746397324,
+      "f1": 0.8275862068965517,
+      "mcc": 0.6445033866354896,
+      "precision": 0.8,
+      "recall": 0.8571428571428571
+    },
+    "lineage_regression": {
+      "mae": 0.09982080331498379,
+      "pearson": 0.5221587815677535,
+      "r2": 0.24844124894685227,
+      "rmse": 0.1419584985395566,
+      "spearman": 0.5955211960697766
+    },
+    "majority_classification": {
+      "accuracy": 0.5,
+      "auprc": 0.5,
+      "auroc": 0.5,
+      "balanced_accuracy": 0.5,
+      "brier": 0.25,
+      "f1": 0.6666666666666666,
+      "mcc": 0.0,
+      "precision": 0.5,
+      "recall": 1.0
+    },
+    "mean_regression": {
+      "mae": 0.1228915960217265,
+      "pearson": 0.0,
+      "r2": -0.0089562373082952,
+      "rmse": 0.164481134930439,
+      "spearman": 0.0
+    }
+  },
+  "calibration_method": "platt",
+  "classification": {
+    "accuracy": 0.9285714285714286,
+    "auprc": 0.9815476190476189,
+    "auroc": 0.979591836734694,
+    "balanced_accuracy": 0.9285714285714286,
+    "brier": 0.149964117999479,
+    "f1": 0.9333333333333333,
+    "mcc": 0.8660254037844387,
+    "precision": 0.875,
+    "recall": 1.0
+  },
+  "decision_threshold": 0.5,
+  "interval_coverage": 0.9464285714285714,
+  "n_models": 368,
+  "n_selected_features": 579,
+  "regression": {
+    "mae": 0.09566529418885396,
+    "pearson": 0.5889206643788101,
+    "r2": 0.3357573624368513,
+    "rmse": 0.13345759797058268,
+    "spearman": 0.6465481886534519
+  }
+}

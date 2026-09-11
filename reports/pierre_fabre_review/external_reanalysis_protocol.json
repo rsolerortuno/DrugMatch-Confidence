@@ -1,0 +1,5 @@
+{
+  "status": "Retrospective re-evaluation of previously inspected GDSC2; no prospective claim.",
+  "endpoint": "AUROC uses external within-drug quartiles; it tests ranking, not transport of PRISM calibration.",
+  "source_sha256": "f8461c50f7aa8404dbd0ee48fe0c4734597ba65e91c828ae25af0708577d6354"
+}

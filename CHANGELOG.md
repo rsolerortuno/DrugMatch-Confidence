@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.1.0.dev0 — evidence review (2026-09-11)
+
+- Fix the release checker to verify the ten shipped historical/review bundles and an existing example; run it in CI.
+- Update README quick start, repository map, citation metadata and release notes.
+- Declare PyArrow in development dependencies and run CI quality checks with only `[dev]`, without relying on Streamlit transitively.
+
+- Add per-fold interval feasibility and post-hoc radius sensitivity; distinguish radius from nominal coverage and assay noise.
+- Report boundary-tie minimum/maximum/expected screening hits and highlight the conditional gemcitabine complexity penalty.
+- Disclose outcome-stratified fold allocation; preserve calibration residuals for future coverage-feasibility audits.
+
+
+- Separate fit, tune, calibration and test roles; fixed calibration policy and exact conformal rank.
+- Explicit sensitive/resistant/abstain decisions with provenance and input-support checks.
+- Matched XGBoost, ElasticNet and lineage baselines, saved OOF predictions and screening-budget analysis.
+- Five review bundles retained as unreviewed; historical bundles and figures preserved.
+- Reproducible review figures in the existing `reports/figures/` directory.
+- Fix Arrow-backed identifier indexing in training and both OOF paths; add regression coverage.
+- Align Python 3.12 and core dependency pins with the serialized models' training environment.
+- CI runs on branch pushes and pull requests, including both historical and review bundle smoke tests.
+
 ## 1.0.0 — 2026-07-27
 
 ### Added
