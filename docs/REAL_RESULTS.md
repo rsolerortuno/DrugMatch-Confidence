@@ -1,3 +1,5 @@
+> Historical v1.0 results. The revised matched evaluation is documented in [PIERRE_FABRE_REVIEW.md](PIERRE_FABRE_REVIEW.md).
+
 # Real-data results
 
 ## Training cohort

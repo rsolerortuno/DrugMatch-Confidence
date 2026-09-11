@@ -6,6 +6,7 @@ from typing import Any
 
 import numpy as np
 import pandas as pd
+from sklearn.metrics import balanced_accuracy_score
 from sklearn.model_selection import StratifiedKFold, train_test_split
 
 from drugmatch.calibration import ProbabilityCalibrator
@@ -82,7 +83,7 @@ def cross_validated_predictions(
         if len(test_cls_ids) < 5 or y_train.nunique() < 2:
             continue
         model_ids, calibration_ids = train_test_split(
-            train_cls_ids,
+            train_cls_ids.to_numpy(dtype=object),
             test_size=0.20,
             random_state=seed + fold,
             stratify=y_train.loc[train_cls_ids],
@@ -139,5 +140,12 @@ def cross_validated_predictions(
             classification_predictions["true_sensitive"]
             == classification_predictions["predicted_sensitive"]
         ).mean()
+    )
+    cls_metrics["accuracy"] = cls_metrics["fold_specific_threshold_accuracy"]
+    cls_metrics["balanced_accuracy"] = float(
+        balanced_accuracy_score(
+            classification_predictions["true_sensitive"],
+            classification_predictions["predicted_sensitive"],
+        )
     )
     return reg_metrics, cls_metrics, regression_predictions, classification_predictions

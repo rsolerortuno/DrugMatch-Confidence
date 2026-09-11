@@ -18,6 +18,10 @@ check:
 	mypy src
 	pytest -q
 	python -m drugmatch --help
+	drugmatch predict --model models/real/depmap_26q1_prism/trametinib.joblib --features examples/trametinib_example_input.csv --output /tmp/drugmatch-historical-prediction.json
+	drugmatch predict --model models/review/depmap_26q1_prism/trametinib.joblib --features examples/trametinib_example_input.csv --output /tmp/drugmatch-review-prediction.json
+	python scripts/check_release.py
+	python scripts/generate_review_figures.py
 
 app:
 	streamlit run app/streamlit_app.py

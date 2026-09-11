@@ -3,4 +3,4 @@
 from drugmatch.api import DrugMatchPredictor, PredictionResult
 
 __all__ = ["DrugMatchPredictor", "PredictionResult"]
-__version__ = "1.0.0"
+__version__ = "1.1.0.dev0"

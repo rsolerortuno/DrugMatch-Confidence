@@ -9,7 +9,7 @@ from typing import Any
 import joblib
 import numpy as np
 import pandas as pd
-from sklearn.metrics import balanced_accuracy_score, brier_score_loss
+from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 
 from drugmatch.calibration import ProbabilityCalibrator
@@ -177,18 +177,30 @@ def train_drug_bundle(
     validation_ids = _index_members(common, split.validation_ids)
     test_ids = _index_members(common, split.test_ids)
 
+    # Preserve the historic test and calibration memberships. Tuning uses only
+    # a new inner partition of the original training set.
+    fit_members, tuning_members = train_test_split(
+        train_ids.to_numpy(dtype=object),
+        test_size=0.20,
+        random_state=seed + 2,
+        stratify=response_strata.loc[train_ids],
+    )
+    train_ids = _index_members(common, list(fit_members))
+    tuning_ids = _index_members(common, list(tuning_members))
     lower = float(auc.loc[train_ids].quantile(0.25))
     upper = float(auc.loc[train_ids].quantile(0.75))
     y = _assign_classes(auc, lower, upper)
     train_cls_ids = y.loc[train_ids].dropna(subset=["binary_class"]).index
     validation_cls_ids = y.loc[validation_ids].dropna(subset=["binary_class"]).index
+    tuning_cls_ids = y.loc[tuning_ids].dropna(subset=["binary_class"]).index
     test_cls_ids = y.loc[test_ids].dropna(subset=["binary_class"]).index
     for partition, ids in {
         "train": train_cls_ids,
+        "tuning": tuning_cls_ids,
         "validation": validation_cls_ids,
         "test": test_cls_ids,
     }.items():
-        if len(ids) < 10 or y.loc[ids, "binary_class"].nunique() < 2:
+        if len(ids) < 4 or y.loc[ids, "binary_class"].nunique() < 2:
             raise ValueError(
                 f"{drug}: {partition} split does not contain enough sensitive and resistant models"
             )
@@ -207,8 +219,8 @@ def train_drug_bundle(
     regression, selected_regression_params, regression_tuning = _select_regressor(
         X_train,
         y_train_reg,
-        X_validation,
-        y_validation_reg,
+        X.loc[tuning_ids],
+        y.loc[tuning_ids, "auc"],
         seed,
         tune,
         regression_params,
@@ -216,8 +228,8 @@ def train_drug_bundle(
     classification, selected_classification_params, classification_tuning = _select_classifier(
         X.loc[train_cls_ids],
         y_train_cls,
-        X.loc[validation_cls_ids],
-        y_validation_cls,
+        X.loc[tuning_cls_ids],
+        y.loc[tuning_cls_ids, "binary_class"].astype(int),
         seed,
         tune,
         classification_params,
@@ -233,32 +245,12 @@ def train_drug_bundle(
     coverage = conformal.empirical_coverage(y_test_reg.to_numpy(), test_reg_pred)
 
     raw_validation_probs = classification.predict_proba(X.loc[validation_cls_ids])[:, 1]
-    platt = ProbabilityCalibrator(method="platt").fit(
+    # Predeclared calibration family and threshold: no selection on calibration data.
+    calibrator = ProbabilityCalibrator(method="platt").fit(
         raw_validation_probs, y_validation_cls.to_numpy()
     )
-    calibration_candidates = [platt]
-    if len(validation_cls_ids) >= 80:
-        calibration_candidates.append(
-            ProbabilityCalibrator(method="isotonic").fit(
-                raw_validation_probs, y_validation_cls.to_numpy()
-            )
-        )
-    calibrator = min(
-        calibration_candidates,
-        key=lambda candidate: brier_score_loss(
-            y_validation_cls.to_numpy(), candidate.predict(raw_validation_probs)
-        ),
-    )
     calibrated_validation_probs = calibrator.predict(raw_validation_probs)
-    thresholds = np.linspace(0.05, 0.95, 91)
-    decision_threshold = float(
-        max(
-            thresholds,
-            key=lambda threshold: balanced_accuracy_score(
-                y_validation_cls.to_numpy(), (calibrated_validation_probs >= threshold).astype(int)
-            ),
-        )
-    )
+    decision_threshold = 0.5
     raw_test_probs = classification.predict_proba(X.loc[test_cls_ids])[:, 1]
     calibrated_test_probs = calibrator.predict(raw_test_probs)
     classification_result = classification_metrics(
@@ -340,12 +332,21 @@ def train_drug_bundle(
         "feature_manifest": feature_manifest.to_dict(orient="records"),
         "training_reference": X_train,
         "data_release": data_release,
-        "project_version": "1.0.0",
+        "project_version": "1.1.0",
+        "validation_protocol": "independent_calibration_v2",
+        "validation_status": "unreviewed",
+        "partition_roles": {
+            "fit": list(train_ids),
+            "tuning": list(tuning_ids),
+            "calibration": list(validation_ids),
+            "test": list(test_ids),
+        },
         "disclaimer": DISCLAIMER,
         "split": split.model_dump(),
         "class_definition": {"positive": "sensitive", "negative": "resistant"},
         "class_thresholds": {"sensitive_auc_max": lower, "resistant_auc_min": upper},
-        "response_bounds": {"minimum": 0.0, "maximum": 1.0},
+        # Assay AUC is not assumed to have a hard [0, 1] support.
+        "response_bounds": None,
         "decision_threshold": decision_threshold,
         "calibration_method": calibrator.method,
         "selected_regression_params": selected_regression_params,
@@ -388,6 +389,7 @@ def train_drug_bundle(
     validation_predictions.to_csv(output / f"{stem}_validation_predictions.csv", index=False)
     write_json(output / f"{stem}_metrics.json", bundle["metrics"])
     write_json(output / f"{stem}_split.json", split.model_dump())
+    write_json(output / f"{stem}_partition_roles.json", bundle["partition_roles"])
 
     return TrainingOutcome(
         drug=drug,

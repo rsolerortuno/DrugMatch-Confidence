@@ -1,5 +1,13 @@
 # Contributing
 
+Use Python 3.12 and install the development dependencies in a virtual environment:
+
+```bash
+python -m pip install -e '.[dev]'
+```
+
+The `app` extra is only needed to run the Streamlit interface. Arrow-backed test cases are supported directly by `dev`.
+
 1. Create a focused branch.
 2. Keep production logic in `src/drugmatch/`.
 3. Add success and failure tests.

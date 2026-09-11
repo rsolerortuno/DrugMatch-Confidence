@@ -16,6 +16,7 @@ from drugmatch.models import train_xgboost, train_xgboost_classifier
 from drugmatch.ood import PCADistanceOOD
 from drugmatch.preprocessing import select_training_features
 from drugmatch.splitting import grouped_split
+from drugmatch.training import _assign_classes
 
 
 def _columns_for_modalities(features: pd.DataFrame, modalities: set[str]) -> list[str]:
@@ -52,6 +53,8 @@ def modality_ablation(
     split = grouped_split(common, seed=seed, stratify=y["response_percentile"].mul(4).astype(int))
     train_ids = pd.Index(split.train_ids).intersection(common)
     test_ids = pd.Index(split.test_ids).intersection(common)
+    lower, upper = y.loc[train_ids, "auc"].quantile([0.25, 0.75])
+    y = _assign_classes(y["auc"], lower, upper)
     compact_columns, _ = select_training_features(X.loc[train_ids], drug)
     X = X[compact_columns]
     train_class_ids = y.loc[train_ids].dropna(subset=["binary_class"]).index
@@ -85,6 +88,9 @@ def modality_ablation(
         rows.append(
             {
                 "ablation": name,
+                "sensitive_auc_max": float(lower),
+                "resistant_auc_min": float(upper),
+                "n_test_extremes": len(test_class_ids),
                 "n_features": float(len(columns)),
                 **{f"regression_{k}": v for k, v in reg.items()},
                 **{f"classification_{k}": v for k, v in cls.items()},
@@ -115,6 +121,8 @@ def leave_one_lineage_out(
     for held_out, _count in candidates.items():
         test_ids = lineage[lineage.eq(held_out)].index
         train_ids = lineage[~lineage.eq(held_out)].index
+        lower, upper = labels.loc[train_ids, "auc"].quantile([0.25, 0.75])
+        y = _assign_classes(labels.loc[common, "auc"], lower, upper)
         train_class_ids = y.loc[train_ids].dropna(subset=["binary_class"]).index
         test_class_ids = y.loc[test_ids].dropna(subset=["binary_class"]).index
         if len(train_class_ids) < 30 or len(test_class_ids) < 8:
@@ -149,6 +157,9 @@ def leave_one_lineage_out(
                 "held_out_lineage": held_out,
                 "n_train": float(len(train_ids)),
                 "n_test": float(len(test_ids)),
+                "sensitive_auc_max": float(lower),
+                "resistant_auc_min": float(upper),
+                "n_test_extremes": len(test_class_ids),
                 "n_features": float(len(columns)),
                 "ood_fraction": float(np.mean(np.asarray(ood_labels) == "out-of-distribution")),
                 **{f"regression_{k}": v for k, v in reg.items()},
@@ -168,10 +179,10 @@ def feature_stability(
     model_params: dict[str, Any] | None = None,
 ) -> pd.DataFrame:
     """Measure how often top SHAP features recur across training folds."""
-    labels = labels_for_drug(response, drug).dropna(subset=["binary_class"])
+    labels = labels_for_drug(response, drug)
     common = features.index.intersection(labels.index)
     X_full = features.loc[common]
-    y = labels.loc[common, "binary_class"].astype(int)
+    auc = labels.loc[common, "auc"]
     if len(X_full) < n_splits * 20:
         raise ValueError("Feature stability requires more observations")
     splitter = KFold(n_splits=n_splits, shuffle=True, random_state=seed)
@@ -180,11 +191,17 @@ def feature_stability(
     for fold, (train_position, test_position) in enumerate(splitter.split(X_full), start=1):
         train_ids = X_full.index[train_position]
         test_ids = X_full.index[test_position]
+        lower, upper = auc.loc[train_ids].quantile([0.25, 0.75])
+        y = _assign_classes(auc, lower, upper)["binary_class"]
+        train_ids = train_ids.intersection(y.dropna().index)
+        test_ids = test_ids.intersection(y.dropna().index)
+        if y.loc[train_ids].nunique() < 2 or len(test_ids) == 0:
+            continue
         columns, _ = select_training_features(X_full.loc[train_ids], drug)
         X = X_full[columns]
         classifier = train_xgboost_classifier(
             X.loc[train_ids],
-            y.loc[train_ids],
+            y.loc[train_ids].astype(int),
             params=model_params,
             seed=seed + fold,
         )

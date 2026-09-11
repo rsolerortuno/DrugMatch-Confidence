@@ -1,10 +1,37 @@
-[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
+[![CI](https://github.com/rsolerortuno/DrugMatch-Confidence/actions/workflows/ci.yml/badge.svg)](https://github.com/rsolerortuno/DrugMatch-Confidence/actions/workflows/ci.yml)
+[![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Models: DepMap 26Q1](https://img.shields.io/badge/models-DepMap%2026Q1-green.svg)](https://depmap.org/portal/data_page/?tab=currentRelease)
 
 # DrugMatch-Confidence
 
 **An interpretable XGBoost tool that predicts drug sensitivity in preclinical cancer cell lines and reports when its prediction should not be trusted.**
+
+## September 2026 update
+
+The [evidence review](docs/PIERRE_FABRE_REVIEW.md) adds independent calibration, explicit abstention, matched OOF baselines and an experimental-budget analysis. In matched OOF evaluation, XGBoost AUROC is **0.848 / 0.905** for trametinib / afatinib; the linear baseline reaches **0.863 / 0.916**. There is no demonstrated XGBoost advantage over that baseline. The strict interval-support policy is inoperative on those saved predictions; a [feasibility audit](docs/PIERRE_FABRE_REVIEW.md#interval-policy-feasibility-not-validated-abstention) explains why. The useful current output is experimental ranking. For gemcitabine, XGBoost loses **0.103 AUROC** to ElasticNet (unadjusted conditional 95% interval **−0.178 to −0.022**).
+
+New bundles are in `models/review/` and remain unreviewed. The sections explicitly marked historical document the v1.0 release; they must not be used as validation of the revised protocol. See the [MAPK experiment plan](docs/MAPK_EXPERIMENT_PLAN.md) and [machine-readable review](reports/pierre_fabre_review/matched_summary.csv).
+
+The bundled models require **Python 3.12+**. Core scientific dependencies are pinned to the recorded training environment; upgrading serialized-model dependencies requires revalidation.
+
+## Current review figures (1.1.0.dev0)
+
+These plots are regenerated from the committed matched-review tables, without retraining:
+
+![Matched five-fold OOF AUROC comparison](reports/figures/review_matched_auroc.png)
+
+![Matched five-fold OOF ROC curves](reports/figures/review_matched_roc.png)
+
+![Sensitive models recovered at a fixed screening budget](reports/figures/review_screening_budget.png)
+
+At a trametinib budget of ten models, XGBoost and ElasticNet each recover seven sensitive models, versus **5–6 for lineage depending on boundary ties (5.2 expected)** and 2.53 expected at random. At twenty models the ordering changes. These are retrospective ranking results, not prospective experimental validation or evidence for automatic treatment decisions.
+
+![Paired complexity differences](reports/figures/review_paired_auroc_difference.png)
+
+![Interval feasibility diagnostic](reports/figures/review_interval_feasibility.png)
+
+Regenerate with `python scripts/generate_review_figures.py`. The [verification report](reports/TEST_REPORT.md) records the checks for this revision. Historical figures below remain available for comparison with v1.0.
 
 ## The idea
 
@@ -13,7 +40,7 @@ Cancer cell lines are laboratory models of tumours. Researchers can measure thou
 For one cell line and one supported drug, the tool returns:
 
 - a predicted continuous response;
-- **sensitive** or **resistant**;
+- a screening decision: **sensitive**, **resistant**, or **abstain**, with reasons;
 - the response zone implied by the continuous regressor;
 - whether the regression and classification heads agree;
 - a calibrated probability;
@@ -23,7 +50,7 @@ For one cell line and one supported drug, the tool returns:
 
 > **Preclinical research only.** These models were trained on cancer cell lines, not patients. They must not be used to choose treatment for a person.
 
-## What is genuinely validated in this release?
+## Historical v1.0 results
 
 The repository contains five real DepMap/PRISM XGBoost bundles. They are not presented as equally strong.
 
@@ -37,11 +64,11 @@ The repository contains five real DepMap/PRISM XGBoost bundles. They are not pre
 
 The main portfolio demonstrations are **trametinib** and **afatinib**. Palbociclib is retained as an exploratory example. Olaparib and gemcitabine are deliberately kept as documented weak/negative results, showing that the pipeline does not hide failure or force XGBoost to appear successful.
 
-## Main validation figures
+## Historical v1.0 validation figures
 
 ### Five-fold out-of-fold ROC curves
 
-Each sample is predicted by a model that did not train on that sample. This is the most stable internal estimate in the project.
+Each sample is predicted by a model that did not train on that sample. These are historical scores; the new matched comparison is linked above.
 
 ![Five-fold out-of-fold ROC curves](reports/figures/oof_roc_curves.png)
 
@@ -120,6 +147,8 @@ python -m pip install --upgrade pip
 python -m pip install -e ".[app,dev]"
 ```
 
+For development and tests without the Streamlit interface, install `'.[dev]'` instead. This extra explicitly includes PyArrow for Arrow-backed identifier tests; CI quality checks use this installation.
+
 ### 2. Check the package
 
 ```bash
@@ -127,14 +156,16 @@ python -m drugmatch --help
 pytest -q
 ```
 
-### 3. Run a bundled real-model prediction
+### 3. Run a review-model prediction
 
 ```bash
 drugmatch predict \
-  --model models/real/depmap_26q1_prism/trametinib.joblib \
+  --model models/review/depmap_26q1_prism/trametinib.joblib \
   --features examples/trametinib_example_input.csv \
   --output examples/trametinib_example_prediction.json
 ```
+
+Review bundles remain `unreviewed`: the screening decision will abstain. Continuous predictions and rankings are research outputs. Historical bundles remain available under `models/real/`.
 
 ### 4. Launch the app
 
@@ -152,11 +183,12 @@ from drugmatch import DrugMatchPredictor
 
 sample = pd.read_csv("examples/trametinib_example_input.csv", index_col=0)
 predictor = DrugMatchPredictor.load(
-    "models/real/depmap_26q1_prism/trametinib.joblib"
+    "models/review/depmap_26q1_prism/trametinib.joblib"
 )
 result = predictor.predict(sample)
 
-print(result.predicted_class)
+print(result.decision)
+print(result.abstention_reasons)
 print(result.sensitivity_probability)
 print(result.confidence)
 print(result.model_status)
@@ -186,7 +218,9 @@ The exact input hashes used for this release are in the manifest. Full instructi
 
 ```text
 src/drugmatch/                 production Python package
-models/real/                   trained real model bundles
+models/real/                   historical v1.0 trained bundles
+models/review/                 independently calibrated review bundles (unreviewed)
+reports/pierre_fabre_review/    matched OOF scores, interval and screening audits
 reports/figures/               ROC, accuracy, calibration and scatter plots
 reports/cross_validation/      five-fold out-of-fold predictions and metrics
 reports/external_validation/   frozen GDSC2 validation
@@ -208,9 +242,9 @@ There are two different uses of “AUC”:
 
 The sensitive class is defined from the lowest training-response quartile and the resistant class from the highest quartile for each drug. The middle half is retained for regression but excluded from the binary classifier.
 
-## Biological findings
+## Historical model explanations
 
-The model explanations recover biologically plausible signals:
+The historical model explanations include the following biologically plausible associations. These are not newly validated biomarkers from the matched review:
 
 - **Trametinib:** MAPK feedback and mesenchymal-state features including `DUSP6`, `EREG`, `NF1`, `FSTL1` and `PLAT`.
 - **Afatinib:** epithelial/ERBB-associated features including `IRF6`, `CLDN1`, `CDH1`, `GRB7` copy number and `FGFBP1`.
@@ -235,7 +269,7 @@ See [`reports/model_card.md`](reports/model_card.md) and [`docs/REAL_RESULTS.md`
 
 ```bash
 pytest -q
-ruff check src tests app
+ruff check src tests app scripts
 mypy src
 python -m build
 ```

@@ -10,6 +10,7 @@ import joblib
 import numpy as np
 import pandas as pd
 
+from drugmatch.decision import screening_decision
 from drugmatch.explain import local_explanation
 
 
@@ -32,6 +33,10 @@ class PredictionResult:
     model_status: str
     evidence_summary: str
     disclaimer: str
+    decision: str
+    abstain: bool
+    abstention_reasons: list[str]
+    probability_scope: str
 
 
 class DrugMatchPredictor:
@@ -87,28 +92,14 @@ class DrugMatchPredictor:
         regression = self.bundle["regression"]
         classification = self.bundle["classification"]
         predicted_auc = float(regression.predict(frame)[0])
-        response_bounds = self.bundle.get("response_bounds", {"minimum": 0.0, "maximum": 1.0})
-        minimum_response = float(response_bounds.get("minimum", 0.0))
-        maximum_response = float(response_bounds.get("maximum", 1.0))
-        predicted_auc = float(np.clip(predicted_auc, minimum_response, maximum_response))
+        # Conformal scores and prediction intervals use the same raw regression
+        # output; assay AUC is not assumed to have a hard [0, 1] support.
         lower, upper = self.bundle["conformal"].predict(np.array([predicted_auc]))
-        lower = np.clip(lower, minimum_response, maximum_response)
-        upper = np.clip(upper, minimum_response, maximum_response)
+        minimum_response, maximum_response = float("-inf"), float("inf")
         raw_probability = classification.predict_proba(frame)[:, 1]
         probability = float(self.bundle["calibrator"].predict(raw_probability)[0])
         transformed = regression.named_steps["preprocess"].transform(frame)
         ood_status = self.bundle["ood"].label(transformed)[0]
-        confidence = "high"
-        if ood_status == "caution":
-            confidence = "moderate"
-        elif ood_status == "out-of-distribution":
-            confidence = "low"
-        if 0.4 <= probability <= 0.6:
-            confidence = "low"
-        if feature_coverage < 0.50:
-            confidence = "low"
-        elif feature_coverage < 0.80 and confidence == "high":
-            confidence = "moderate"
         drivers = local_explanation(classification, frame, top_n=8).to_dict(orient="records")
         predicted_class = (
             "sensitive"
@@ -126,13 +117,22 @@ class DrugMatchPredictor:
             response_zone = "intermediate"
         if response_zone == "intermediate":
             model_agreement = "indeterminate"
-            if confidence == "high":
-                confidence = "moderate"
         elif response_zone == predicted_class:
             model_agreement = "concordant"
         else:
             model_agreement = "discordant"
-            confidence = "low"
+        decision = screening_decision(
+            probability=probability,
+            threshold=float(self.bundle.get("decision_threshold", 0.5)),
+            interval_lower=float(lower[0]),
+            interval_upper=float(upper[0]),
+            sensitive_max=sensitive_max,
+            resistant_min=resistant_min,
+            feature_coverage=feature_coverage,
+            ood_status=ood_status,
+            model_status=str(self.bundle.get("validation_status", "unreviewed")),
+            calibration_protocol=str(self.bundle.get("validation_protocol", "legacy")),
+        )
         return PredictionResult(
             drug=self.bundle["drug"],
             predicted_auc=predicted_auc,
@@ -142,7 +142,11 @@ class DrugMatchPredictor:
             response_zone=response_zone,
             model_agreement=model_agreement,
             sensitivity_probability=probability,
-            confidence=confidence,
+            confidence=decision.confidence,
+            decision=decision.action,
+            abstain=decision.action == "abstain",
+            abstention_reasons=list(decision.reasons),
+            probability_scope="Conditional on training-defined response extremes; not a patient response probability.",
             ood_status=ood_status,
             top_drivers=drivers,
             feature_coverage=float(feature_coverage),

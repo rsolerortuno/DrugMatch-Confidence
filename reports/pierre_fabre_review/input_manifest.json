@@ -1,0 +1,27 @@
+{
+  "source_sha256": {
+    "OmicsExpressionTPMLogp1HumanProteinCodingGenes.csv.zip": "46fd433bdf4bfa8baf9b63fb2e9fd72ecabf64397e0c4d9142158e3b4be743c2",
+    "Model.csv": "ea4e0b2a3bc806f81df62689a5ae75f1a100135727a3d7b8a4c7ccc8815183f8",
+    "OmicsSomaticMutationsMatrixDamaging.csv.zip": "d4c2f89252b9a7e1bc074e16c5770abfd5dd0939236f4f65e3e33a47deede260",
+    "PortalOmicsCNGeneLog2.csv.zip": "a71ebebd6e0b5d7bab8f03233b97d1491c1983e821661959827dbc39c1a5adec",
+    "OmicsSomaticMutationsMatrixHotspot.csv": "a86cd8c92b86d5507e63103f06a507913897c85262e0a0d7e44fa22768dd4dc9",
+    "OmicsGlobalSignatures.csv": "d210b664edf42598129a3bb982af4a3b4aa22100411bb61ecb9baa7f81cf6011",
+    "secondary-screen-dose-response-curve-parameters.csv": "88d1013506e0cd6f191a51c5f3fdd3fb2be54f8afb4e19a5d1f8538e81fbfec8"
+  },
+  "n_feature_models": 377,
+  "n_features": 58498,
+  "response_min": 0.0075898427372001,
+  "response_max": 2.24797492027832,
+  "release": "DepMap Public 26Q1 + PRISM secondary screen",
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.8.0",
+    "xgboost": "3.4.1",
+    "shap": "0.52.0"
+  },
+  "protocol": "Fixed matched OOF; retrospective development reanalysis; no new external confirmation",
+  "seed": 2026,
+  "split_stratification": "Full-cohort response-rank quartiles allocate outer/inner folds only. Outcomes inform allocation, not fit-only feature selection or class cutoffs; calibration remains separate.",
+  "calibration_residual_archive": "Original OOF residual distributions unavailable; no nominal first-support coverage inferred from a lone 90% radius."
+}

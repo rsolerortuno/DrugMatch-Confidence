@@ -1,0 +1,12 @@
+{
+  "seed": 1701,
+  "split_stratification": "Outer and inner fold allocation uses full-cohort outcome-rank quartiles. Outcomes inform allocation only, not fitted features, class cutoffs or calibration. This is outcome-stratified retrospective evaluation, not outcome-blind prospective assignment.",
+  "tie_analysis": "Exact saved-score boundary ties: deterministic ModelID list, min/max hits, and analytic expectation over uniform boundary tie breaks. Outcomes evaluate, never select, a tie break.",
+  "interval_feasibility": "Per-fold radius and candidate headroom; post-hoc scaling is not nominal coverage. Original calibration residuals are unavailable, so 65\u201379% first-support coverage estimates are not verified. Residual error is not an assay-noise ceiling.",
+  "bootstrap_repetitions": 2000,
+  "confidence_interval": "Percentile paired stratified bootstrap of saved OOF scores; conditional on fitted folds, not retraining uncertainty.",
+  "ranking": "Ascending predicted assay AUC; deterministic ModelID tie break; all response levels included.",
+  "hit_definition": "Observed assay AUC at or below the fit-only 25th percentile in the corresponding fold.",
+  "data_status": "Retrospective reanalysis, not a prospective validation; no tuning on external outcomes.",
+  "risk_coverage": "Probability-only diagnostic reported separately from the frozen full abstention policy."
+}

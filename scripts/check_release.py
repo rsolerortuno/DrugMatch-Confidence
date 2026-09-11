@@ -19,7 +19,7 @@ REQUIRED = [
     "docs/REAL_DATA_TRAINING.md",
     "reports/model_card.md",
     "reports/data_audit/prism_drug_audit.csv",
-    "reports/examples/example_input.csv",
+    "examples/trametinib_example_input.csv",
 ]
 
 
@@ -27,10 +27,10 @@ def main() -> None:
     missing = [path for path in REQUIRED if not (ROOT / path).exists()]
     if missing:
         raise SystemExit(f"Missing release files: {missing}")
-    groups = ["synthetic_omics", "prism_lineage"]
+    groups = ["real/depmap_26q1_prism", "review/depmap_26q1_prism"]
     records: list[dict] = []
     for group in groups:
-        model_paths = sorted((ROOT / "models" / "demo" / group).glob("*.joblib"))
+        model_paths = sorted((ROOT / "models" / group).glob("*.joblib"))
         if len(model_paths) != 5:
             raise SystemExit(f"Expected five {group} models; found {len(model_paths)}")
         for path in model_paths:
